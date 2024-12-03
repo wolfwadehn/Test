@@ -1,0 +1,1984 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<style>
+body {font-family: Arial;}
+
+body{font-size:20px;font-family:Open Sans, Segoe UI, Helvetica!important;background:rgb(240, 240, 240);}
+input,select,textarea{font-weight:400; font-size:1em!important;line-height:1.375em;font-family:Open Sans, Segoe UI, Helvetica!important;}
+h1, h2, h3, h4, h5, h6 {font-family:Open Sans, Segoe UI, Helvetica!important;line-height:2em}
+p {font-family:Open Sans, Segoe UI, Helvetica!important;line-height:1em;font-size:20px;}
+* {
+  padding-left: 10px;
+}
+.b1, .b2, .dd2 {
+ background-color: #888888; 
+  border: none;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  border-radius: 5px;
+  border: 1px solid black
+  }
+
+.txt1{
+width: 100%;
+height: 40px;
+margin: 4px 2px;
+border: 1px solid black
+}
+.b1 {
+  width: 22%;
+  height: 40px;
+}
+
+ button.pressed {
+       background-color: rgb(165, 165, 165);
+}
+
+#tables {
+  font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+#red {background-color: #fffff0}
+
+#tables td, #tables th {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+#tables tr:nth-child(even){background-color: #f2f2f2;}
+
+#tables th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: rgb(112, 112, 112);
+  color: white;
+}
+
+.fixed_header tbody{
+  display:block;
+  overflow:auto;
+  height:200px;
+  width:100%;
+}
+.fixed_header thead tr{
+  display:block;
+}
+
+.tooltip {
+  position: relative;
+  display: inline-block;
+  border-bottom: 1px dotted black;
+}
+
+.tooltip .tooltiptext {
+  visibility: hidden;
+  width: 120px;
+  background-color: #555;
+  color: #fff;
+  text-align: left;
+  width: 700px;
+  border-radius: 6px;
+  padding: 5px 0;
+  position: absolute;
+  z-index: 1;
+  bottom: 125%;
+  left: -50%;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.tooltip .tooltiptext::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: #555 transparent transparent transparent;
+}
+
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+  opacity: 1;
+}
+
+/* Style the tab */
+.tab {
+  overflow: hidden;
+  border: 1px solid #ccc;
+  background-color: #f1f1f1;
+}
+
+/* Style the buttons inside the tab */
+.tab button {
+  background-color: inherit;
+  float: left;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  padding: 14px 16px;
+  transition: 0.3s;
+  font-size: 17px;
+}
+
+/* Change background color of buttons on hover */
+.tab button:hover {
+  background-color: #ddd;
+}
+
+/* Create an active/current tablink class */
+.tab button.active {
+  background-color: #ccc;
+}
+
+/* Style the tab content */
+.tabcontent {
+  display: none;
+  padding: 6px 12px;
+  border: 1px solid #ccc;
+  border-top: none;
+}
+</style>
+</head>
+<body>
+
+<img src="./logo.jpg" alt="Logo" >
+<table>
+      <tr>
+        <td> <img src="3030.jpg" alt="Logo" width="400px" >
+          <p style="background-color: rgb(0,255,0);"><br><b> Good condition </b><br>. </p></td>
+        <td>
+  <table>
+   <tr><td>Kunde</td><td>Maier GmbH</td>  </tr>
+   <tr><td>Wartungsvetrag</td><td>Premium</td>  </tr>
+   <tr><td><b>Maschine</b></td><td><b>A0221A23432</b></td>  </tr>
+   <tr><td>Lasertyp</td><td>TruFlow3200 A65435E6654</td>  </tr>
+   <tr><td>-</td><td></td>  </tr>
+   <tr><td>Next AuftragsID</td><td>03080732</td>  </tr>  
+   <tr><td>Erstellung</td><td>03-Jul-2020 08:09:32</td>  </tr> 
+    <tr><td>Betriebsstundenzaehler</td><td>6546565</td>  </tr>
+   <tr><td>Strahl an</td><td>654654</td>  </tr>
+   </table>
+</table>
+
+  <p> </p>
+  <p> </p>
+
+<div class="tab">
+  <button class="tablinks" onclick="opentab(event, 'General')">General</button>
+  <button class="tablinks" onclick="opentab(event, 'Status')">Historie</button>
+  <button class="tablinks" onclick="opentab(event, 'Operator')">Staus Operator</button>
+  <button class="tablinks" onclick="opentab(event, 'Maintenance')">Tasks Maintenance</button>
+  <button class="tablinks" onclick="opentab(event, 'TRUMPF')">Status TRUMPF</button>
+</div>
+
+ <!--****************************************--> 
+<div id="General" class="tabcontent">
+  <h3>General Information</h3>
+<table>
+    <tr>
+      <th>Taetigkeit</th>
+      <th>Tasks</th>
+      <th>Planzeit HZ</th>
+      <th>Planzeit NZ</th>
+      <th>Faellig</th>
+      <th>Status letzte Wartung</th>
+      <th>Teile / Werkzeug</th>
+      <th>Kommentar</th>
+    </tr>
+    <tr><td>Operator Schichtwechsel</td><td>28</td><td>90min</td><td>170min</td> <td style="background-color:rgb(255,0,0)">29.Jul,2020</td> <td style="background-color:rgb(255,251,0)">Stege Verschleissgrenze</td><td>Düsenhalter-2D-Keramik-M12-CL, Mat.-Nr. 1906032<br>Hakenschlurssel Mat.-Nr. 1615026</td> </tr>
+    <tr><td>Operator Wochenwartung</td><td>28</td><td>90min</td><td>170min</td> <td style="background-color:rgb(0,251,0)">29.Jul,2020</td> <td style="background-color:rgb(255,251,0)">OK</td><td></td> </tr>
+    <tr><td>Wartungseinsatz</td><td>10</td><td>5min</td><td>530min</td> <td style="background-color:rgb(0,251,0)">30.Nov,2020</td>    <tr><td>TRUMPF Wartung</td><td>10</td><td>141min</td><td>503min</td> <td style="background-color:rgb(0,251,0)">29.Sep,2020</td>  </table>
+
+
+</div>
+
+<!--****************************************--> 
+<div id="Status" class="tabcontent">
+ <h3>Historie der letzten Einsaetze</h3>
+ 
+
+<table>
+    <tr><td>10.07.2020</td><td>Operator</td> <td>Status: OK</td> <td><a href="https://www.w3schools.com/">Report</a></td> </tr>
+    <tr><td>09.07.2020</td><td>Operator</td> <td>Status: OK</td> <td><a href="https://www.w3schools.com/">Report</a></td> </tr>
+    <tr><td>08.07.2020</td><td>Operator</td> <td>Status: OK</td> <td><a href="https://www.w3schools.com/">Report</a></td> </tr>
+    <tr><td>08.07.2020</td><td>Wartungsreport: Maier</td> <td>Status: OK</td> <td><a href="https://www.w3schools.com/">Report</a></td> </tr>
+    <tr><td>04.07.2020</td><td>Operator</td> <td>Status: OK</td> <td><a href="https://www.w3schools.com/">Report</a></td> </tr>
+    <tr><td>03.07.2020</td><td>Operator</td> <td>Status: OK</td> <td><a href="https://www.w3schools.com/">Report</a></td> </tr>
+    <tr><td>02.07.2020</td><td>Operator</td> <td>Status: OK</td> <td><a href="https://www.w3schools.com/">Report</a></td> </tr>
+    <tr><td>01.07.2020</td><td>Operator</td> <td>Status: OK</td> <td><a href="https://www.w3schools.com/">Report</a></td> </tr>
+    <tr><td>10.06.2020</td><td>Operator</td> <td>Status: OK</td> <td><a href="https://www.w3schools.com/">Report</a></td> </tr>
+    <tr><td>10.06.2020</td><td>Operator</td> <td>Status: OK</td> <td><a href="https://www.w3schools.com/">Report</a></td> </tr>
+
+ </table> 
+</div>
+
+<!--****************************************--> 
+<div id="Operator" class="tabcontent">
+<table id="tables">
+  <tr>
+    <th></th>
+    <th>Wartungsstelle</th>
+    <th>Wartungsaufgabe</th>
+    <th>Soll</th>
+    <th>Ist</th>
+    <th>__Cycle__</th>
+    <th>Zustand</th>
+    <th>___Faellig___</th>
+    <th>  <div class="tooltip">Dauer(NZ)<span class="tooltiptext">Dauer in min<br>[] = HZP</span> </div></th>
+  </tr>
+  <tr>
+    <td><input type="checkbox" class="ch1"  onclick="a[4]=4;"><br></td>
+    <td>[4 CU] Schneideinheit</td>
+    <td>  <div class="tooltip">Keramikteil reinigen/ ggf. tauschen<span class="tooltiptext">Details: NaN<br>Ersatzteil: Duesenhalter-2D-Keramik-M12-CL/ Mat.-Nr. 1906032Hakenschluessel Mat.-Nr. 1615026<br>Werkzeug: NaN</span> </div></td>
+    <td>Insp</td>
+    <td></td>
+    <td>8 h</td>
+    <td style="background-color:rgb(255,0,0)"><div class="tooltip">critical<span class="tooltiptext">* Action needed: *<br>Assign#: 661134<br>LastAssign:30615<br>Comments:FAIL</span> </div></td>
+    <td style="background-color:rgb(255, 0, 0)"><div class="tooltip">2020-07-30<span class="tooltiptext">No assignment scheduled</span> </div></td>
+    <td>(1)</td>
+  </tr>
+  <tr>
+    <td><input type="checkbox" class="ch1"  onclick="a[5]=5;"><br></td>
+    <td>[5 CU] Schneideinheit</td>
+    <td>  <div class="tooltip">Schneidduese  kontrollieren/ ggf. tauschen<span class="tooltiptext">Details: NaN<br>Ersatzteil: Duese zum Schneiden: Duese EAA D0/8/ Mat.-Nr. 1324858<br>Werkzeug: NaN</span> </div></td>
+    <td>Insp</td>
+    <td></td>
+    <td>8 h</td>
+    <td style="background-color:rgb(200,200,200)"><div class="tooltip">N/A<span class="tooltiptext"></span> </div></td>
+    <td style="background-color:rgb(255, 0, 0)"><div class="tooltip">2020-07-29<span class="tooltiptext">No assignment scheduled</span> </div></td>
+    <td>(5)</td>
+  </tr>
+  <tr>
+    <td><input type="checkbox" class="ch1"  onclick="a[6]=6;"><br></td>
+    <td>[6 CU] Schneideinheit</td>
+    <td>  <div class="tooltip">Querblasduese kontrollieren/ ggf. tauschen<span class="tooltiptext">Details: NaN<br>Ersatzteil: Querblasen / Piercelineduese: Duese D2/0 Mat.-Nr. 1384753<br>Werkzeug: NaN</span> </div></td>
+    <td>Insp</td>
+    <td></td>
+    <td>8 h</td>
+    <td style="background-color:rgb(200,200,200)"><div class="tooltip">N/A<span class="tooltiptext"></span> </div></td>
+    <td style="background-color:rgb(255, 0, 0)"><div class="tooltip">2020-07-29<span class="tooltiptext">No assignment scheduled</span> </div></td>
+    <td>(1)</td>
+  </tr>
+  <tr>
+    <td><input type="checkbox" class="ch1"  onclick="a[10]=10;"><br></td>
+    <td>[10 ES] Kompaktentstauber</td>
+    <td>  <div class="tooltip">Feinstaubbehaelter kontrollieren/ ggf. tauschen<span class="tooltiptext">Details: NaN<br>Ersatzteil: Staubbehaelter 200LTR. D=610mm H=883mm (0345072)<br>Werkzeug: NaN</span> </div></td>
+    <td>  <div class="tooltip">0<span class="tooltiptext">Fuellgrad Feinstaubbehaelter in %<br>Sollzustand=leer=0%</span> </div></td>
+    <td></td>
+    <td>8 h</td>
+    <td style="background-color:rgb(200,200,200)"><div class="tooltip">N/A<span class="tooltiptext"></span> </div></td>
+    <td style="background-color:rgb(255, 0, 0)"><div class="tooltip">2020-07-29<span class="tooltiptext">No assignment scheduled</span> </div></td>
+    <td>2</td>
+  </tr>
+  <tr>
+    <td><input type="checkbox" class="ch1"  onclick="a[17]=17;"><br></td>
+    <td>[17 ES] Kompaktentstauber</td>
+    <td>  <div class="tooltip">Grobstaubbehaelter kontrollieren/ ggf. tauschen<span class="tooltiptext">Details: NaN<br>Ersatzteil: Antistatischer Kunststoff Reiniger und Pfleger UBA 0197 0057/ Fa. Burnus GmbH (1672922)<br>Werkzeug: NaN</span> </div></td>
+    <td>  <div class="tooltip">0<span class="tooltiptext">Fuellgrad Grobstaubbehaelter  in %<br>Sollzustand=leer=0%</span> </div></td>
+    <td></td>
+    <td>8 h</td>
+    <td style="background-color:rgb(200,200,200)"><div class="tooltip">N/A<span class="tooltiptext"></span> </div></td>
+    <td style="background-color:rgb(255, 0, 0)"><div class="tooltip">2020-07-29<span class="tooltiptext">No assignment scheduled</span> </div></td>
+    <td>2</td>
+  </tr>
+  <tr>
+    <td><input type="checkbox" class="ch1"  onclick="a[28]=28;"><br></td>
+    <td>[28 MH] Materialschleuse</td>
+    <td>  <div class="tooltip">Lamellenvorhang kontrollieren<span class="tooltiptext">Details: NaN<br>Ersatzteil: SP MAT6565486<br>Werkzeug: NaN</span> </div></td>
+    <td>Insp</td>
+    <td></td>
+    <td>8 h</td>
+    <td style="background-color:rgb(200,200,200)"><div class="tooltip">N/A<span class="tooltiptext"></span> </div></td>
+    <td style="background-color:rgb(255, 0, 0)"><div class="tooltip">2020-07-29<span class="tooltiptext">No assignment scheduled</span> </div></td>
+    <td>(10)</td>
+  </tr>
+  <tr>
+    <td><input type="checkbox" class="ch1"  onclick="a[29]=29;"><br></td>
+    <td>[29 MH] Schutzzaun</td>
+    <td>  <div class="tooltip">Lamellenvorhang und Sichtschutzbleche kontrollieren<span class="tooltiptext">Details: NaN<br>Ersatzteil: SP MAT6565487<br>Werkzeug: NaN</span> </div></td>
+    <td>Insp</td>
+    <td></td>
+    <td>8 h</td>
+    <td style="background-color:rgb(200,200,200)"><div class="tooltip">N/A<span class="tooltiptext"></span> </div></td>
+    <td style="background-color:rgb(255, 0, 0)"><div class="tooltip">2020-07-29<span class="tooltiptext">No assignment scheduled</span> </div></td>
+    <td>5</td>
+  </tr>
+  <tr>
+    <td><input type="checkbox" class="ch1"  onclick="a[30]=30;"><br></td>
+    <td>[30 MH] Palette</td>
+    <td>  <div class="tooltip">Blendleiste kontrollieren<span class="tooltiptext">Details: NaN<br>Ersatzteil: SP MAT6565488<br>Werkzeug: NaN</span> </div></td>
+    <td>Insp</td>
+    <td></td>
+    <td>8 h</td>
+    <td style="background-color:rgb(200,200,200)"><div class="tooltip">N/A<span class="tooltiptext"></span> </div></td>
+    <td style="background-color:rgb(255, 0, 0)"><div class="tooltip">2020-07-29<span class="tooltiptext">No assignment scheduled</span> </div></td>
+    <td>(5)</td>
+  </tr>
+  <tr>
+    <td><input type="checkbox" class="ch1"  onclick="a[50]=50;"><br></td>
+    <td>[50 NO] Automatischer Duesenwechsler (Option)</td>
+    <td>  <div class="tooltip">Duesen/ aufnahme und Duesengewinde kontrollieren<span class="tooltiptext">Details: NaN<br>Ersatzteil: SP MAT6565507<br>Werkzeug: NaN</span> </div></td>
+    <td>Insp</td>
+    <td></td>
+    <td>8 h</td>
+    <td style="background-color:rgb(200,200,200)"><div class="tooltip">N/A<span class="tooltiptext"></span> </div></td>
+    <td style="background-color:rgb(255, 0, 0)"><div class="tooltip">2020-07-29<span class="tooltiptext">No assignment scheduled</span> </div></td>
+    <td>(3)</td>
+  </tr>
+  <tr>
+    <td><input type="checkbox" class="ch1"  onclick="a[53]=53;"><br></td>
+    <td>[53 NO] Automatischer Duesenwechsler (Option)</td>
+    <td>  <div class="tooltip">Duesen/ aufnahme und Duesengewinde kontrollieren<span class="tooltiptext">Details: NaN<br>Ersatzteil: SP MAT6565507<br>Werkzeug: NaN</span> </div></td>
+    <td>Insp</td>
+    <td></td>
+    <td>8 h</td>
+    <td style="background-color:rgb(200,200,200)"><div class="tooltip">N/A<span class="tooltiptext"></span> </div></td>
+    <td style="background-color:rgb(255, 0, 0)"><div class="tooltip">2020-07-29<span class="tooltiptext">No assignment scheduled</span> </div></td>
+    <td>3</td>
+  </tr>
+  <tr>
+    <td><input type="checkbox" class="ch1"  onclick="a[70]=70;"><br></td>
+    <td>[70 MI] Laengsfoerderband</td>
+    <td>  <div class="tooltip">Abdeckung Laengs- zu Querfoerderband in der Maschine hinten reinigen<span class="tooltiptext">Details: Paletten und Schottbleche muessen raus. Bei 4+6m mehr Zeit fuer Abdeckungs ausbauen/ da dies mehrteilig ist.<br>Ersatzteil: SP MAT6565493<br>Werkzeug: NaN</span> </div></td>
+    <td>Insp</td>
+    <td></td>
+    <td>8 h</td>
+    <td style="background-color:rgb(200,200,200)"><div class="tooltip">N/A<span class="tooltiptext"></span> </div></td>
+    <td style="background-color:rgb(255, 0, 0)"><div class="tooltip">2020-07-29<span class="tooltiptext">No assignment scheduled</span> </div></td>
+    <td>(10)</td>
+  </tr>
+  <tr>
+    <td><input type="checkbox" class="ch1"  onclick="a[11]=11;"><br></td>
+    <td>[11 ES] Kompaktentstauber</td>
+    <td>  <div class="tooltip">Differenzdruckanzeige Anzeige im Bereich von 8-16mbar kontrollieren<span class="tooltiptext">Details: NaN<br>Ersatzteil: SP MAT6565465<br>Werkzeug: NaN</span> </div></td>
+    <td>Y/N</td>
+    <td></td>
+    <td>40 h</td>
+    <td style="background-color:rgb(200,200,200)"><div class="tooltip">N/A<span class="tooltiptext"></span> </div></td>
+    <td style="background-color:rgb(255, 0, 0)"><div class="tooltip">2020-08-02<span class="tooltiptext">No assignment scheduled</span> </div></td>
+    <td>2</td>
+  </tr>
+  <tr>
+    <td><input type="checkbox" class="ch1"  onclick="a[24]=24;"><br></td>
+    <td>[24 MH] Palettenwechsler</td>
+    <td>  <div class="tooltip">Auflageleisten und Leistenhalter reinigen/ ggf. tauschen<span class="tooltiptext">Details: NaN<br>Ersatzteil: SP MAT6565481<br>Werkzeug: NaN</span> </div></td>
+    <td>Insp</td>
+    <td></td>
+    <td>40 h</td>
+    <td style="background-color:rgb(200,200,200)"><div class="tooltip">N/A<span class="tooltiptext"></span> </div></td>
+    <td style="background-color:rgb(255, 0, 0)"><div class="tooltip">2020-08-02<span class="tooltiptext">No assignment scheduled</span> </div></td>
+    <td>60</td>
+  </tr>
+  <tr>
+    <td><input type="checkbox" class="ch1"  onclick="a[35]=35;"><br></td>
+    <td>[35 MI] Laengsfoerderband</td>
+    <td>  <div class="tooltip">Laengsfoerderband kontrollieren<span class="tooltiptext">Details: NaN<br>Ersatzteil: SP MAT6565494<br>Werkzeug: NaN</span> </div></td>
+    <td>Insp</td>
+    <td></td>
+    <td>40 h</td>
+    <td style="background-color:rgb(200,200,200)"><div class="tooltip">N/A<span class="tooltiptext"></span> </div></td>
+    <td style="background-color:rgb(255, 0, 0)"><div class="tooltip">2020-08-02<span class="tooltiptext">No assignment scheduled</span> </div></td>
+    <td>(15)</td>
+  </tr>
+  <tr>
+    <td><input type="checkbox" class="ch1"  onclick="a[36]=36;"><br></td>
+    <td>[36 MI] Absaugmodul</td>
+    <td>  <div class="tooltip">Schottbleche/ Gitterbleche/ Schutzplatten und Absaugklappen reinigen/ ggf. tauschen<span class="tooltiptext">Details: NaN<br>Ersatzteil: SP MAT6565495<br>Werkzeug: NaN</span> </div></td>
+    <td>Insp</td>
+    <td></td>
+    <td>40 h</td>
+    <td style="background-color:rgb(200,200,200)"><div class="tooltip">N/A<span class="tooltiptext"></span> </div></td>
+    <td style="background-color:rgb(255, 0, 0)"><div class="tooltip">2020-08-02<span class="tooltiptext">No assignment scheduled</span> </div></td>
+    <td>(30)</td>
+  </tr>
+  <tr>
+    <td><input type="checkbox" class="ch1"  onclick="a[37]=37;"><br></td>
+    <td>[37 MI] Absaugklappen</td>
+    <td>  <div class="tooltip">Verschmutzung und Funktion  kontrollieren/ ggf. reinigen<span class="tooltiptext">Details: NaN<br>Ersatzteil: SP MAT6565496<br>Werkzeug: NaN</span> </div></td>
+    <td>Insp</td>
+    <td></td>
+    <td>40 h</td>
+    <td style="background-color:rgb(200,200,200)"><div class="tooltip">N/A<span class="tooltiptext"></span> </div></td>
+    <td style="background-color:rgb(255, 0, 0)"><div class="tooltip">2020-08-02<span class="tooltiptext">No assignment scheduled</span> </div></td>
+    <td>(30)</td>
+  </tr>
+  <tr>
+    <td><input type="checkbox" class="ch1"  onclick="a[40]=40;"><br></td>
+    <td>[40 MI] Schlackeschubladen</td>
+    <td>  <div class="tooltip">Verschleissbleche  kontrollieren/ ggf. tauschen<span class="tooltiptext">Details: NaN<br>Ersatzteil: NaN<br>Werkzeug: NaN</span> </div></td>
+    <td>Insp</td>
+    <td></td>
+    <td>40 h</td>
+    <td style="background-color:rgb(200,200,200)"><div class="tooltip">N/A<span class="tooltiptext"></span> </div></td>
+    <td style="background-color:rgb(255, 0, 0)"><div class="tooltip">2020-08-02<span class="tooltiptext">No assignment scheduled</span> </div></td>
+    <td>(10)</td>
+  </tr>
+  <tr>
+    <td><input type="checkbox" class="ch1"  onclick="a[41]=41;"><br></td>
+    <td>[41 MI] Absaugkanal Y-Achse</td>
+    <td>  <div class="tooltip">Schutzbleche kontrollieren/ ggf. tauschen<span class="tooltiptext">Details: NaN<br>Ersatzteil: NaN<br>Werkzeug: NaN</span> </div></td>
+    <td>Insp</td>
+    <td></td>
+    <td>40 h</td>
+    <td style="background-color:rgb(200,200,200)"><div class="tooltip">N/A<span class="tooltiptext"></span> </div></td>
+    <td style="background-color:rgb(255, 0, 0)"><div class="tooltip">2020-08-02<span class="tooltiptext">No assignment scheduled</span> </div></td>
+    <td>(10)</td>
+  </tr>
+  <tr>
+    <td><input type="checkbox" class="ch1"  onclick="a[58]=58;"><br></td>
+    <td>[58 OP] Bedienpult</td>
+    <td>  <div class="tooltip">Bildschirm/ Tastatur/ Maus reinigen<span class="tooltiptext">Details: NaN<br>Ersatzteil: Bildschirmreiniger und weiches Tuch<br>Werkzeug: NaN</span> </div></td>
+    <td>Insp</td>
+    <td></td>
+    <td>40 h</td>
+    <td style="background-color:rgb(200,200,200)"><div class="tooltip">N/A<span class="tooltiptext"></span> </div></td>
+    <td style="background-color:rgb(255, 0, 0)"><div class="tooltip">2020-08-02<span class="tooltiptext">No assignment scheduled</span> </div></td>
+    <td>2</td>
+  </tr>
+  <tr>
+    <td><input type="checkbox" class="ch1"  onclick="a[59]=59;"><br></td>
+    <td>[59 OP] Bedienpult</td>
+    <td>  <div class="tooltip">Schaltglied Oelspruehen durchfuehren<span class="tooltiptext">Details: NaN<br>Ersatzteil: NaN<br>Werkzeug: NaN</span> </div></td>
+    <td>Insp</td>
+    <td></td>
+    <td>40 h</td>
+    <td style="background-color:rgb(200,200,200)"><div class="tooltip">N/A<span class="tooltiptext"></span> </div></td>
+    <td style="background-color:rgb(255, 0, 0)"><div class="tooltip">2020-08-02<span class="tooltiptext">No assignment scheduled</span> </div></td>
+    <td>2</td>
+  </tr>
+  <tr>
+    <td><input type="checkbox" class="ch1"  onclick="a[61]=61;"><br></td>
+    <td>[61 OP] Geraeteblech MK FKL [Fluidplan Nr.:50.10E]</td>
+    <td>  <div class="tooltip">Filter O2 Schneidgas (Polyglas)Bedarfsfall liegt nur bei Verschmutzung vor kontrollieren/ ggf. tauschen<span class="tooltiptext">Details: Hahn absperren.Versorgung entlueften.Filter tauschen <br>Ersatzteil: 365785<br>Werkzeug: NaN</span> </div></td>
+    <td>Insp</td>
+    <td></td>
+    <td>40 h</td>
+    <td style="background-color:rgb(200,200,200)"><div class="tooltip">N/A<span class="tooltiptext"></span> </div></td>
+    <td style="background-color:rgb(255, 0, 0)"><div class="tooltip">2020-08-02<span class="tooltiptext">No assignment scheduled</span> </div></td>
+    <td>(5)</td>
+  </tr>
+  <tr>
+    <td><input type="checkbox" class="ch1"  onclick="a[62]=62;"><br></td>
+    <td>[62 OP] Geraeteblech MK FKL [Fluidplan Nr.:39.1]</td>
+    <td>  <div class="tooltip">CutFluid Sprueheinrichtung nachfuellen<span class="tooltiptext">Details: Reinigung mit Intensivreiniger und anschliessende Antistatikbehandlung mit Antistatikreiniger<br>Ersatzteil: 0356258 oder 0356259<br>Werkzeug: NaN</span> </div></td>
+    <td>  <div class="tooltip">100<span class="tooltiptext">Fuellgrad <br>Sollzustand=voll=100%</span> </div></td>
+    <td></td>
+    <td>40 h</td>
+    <td style="background-color:rgb(200,200,200)"><div class="tooltip">N/A<span class="tooltiptext"></span> </div></td>
+    <td style="background-color:rgb(255, 0, 0)"><div class="tooltip">2020-08-02<span class="tooltiptext">No assignment scheduled</span> </div></td>
+    <td>5</td>
+  </tr>
+  <tr>
+    <td><input type="checkbox" class="ch1"  onclick="a[63]=63;"><br></td>
+    <td>[63 OP] Geraeteblech MK FKL [Fluidplan Nr.:1.21]</td>
+    <td>  <div class="tooltip">Kondenswasserbehaelter kontrollieren ggf. leeren<span class="tooltiptext">Details: NaN<br>Ersatzteil: NaN<br>Werkzeug: NaN</span> </div></td>
+    <td>Insp</td>
+    <td></td>
+    <td>40 h</td>
+    <td style="background-color:rgb(200,200,200)"><div class="tooltip">N/A<span class="tooltiptext"></span> </div></td>
+    <td style="background-color:rgb(255, 0, 0)"><div class="tooltip">2020-08-02<span class="tooltiptext">No assignment scheduled</span> </div></td>
+    <td>2</td>
+  </tr>
+  <tr>
+    <td><input type="checkbox" class="ch1"  onclick="a[64]=64;"><br></td>
+    <td>[64 OP] Geraeteblech MK FKL [Fluidplan Nr.:35.3]</td>
+    <td>  <div class="tooltip">Schmiermittelstand Zentralschmierung nachfuellen<span class="tooltiptext">Details: NaN<br>Ersatzteil: 111780<br>Werkzeug: NaN</span> </div></td>
+    <td>  <div class="tooltip">100<span class="tooltiptext">Fuellgrad <br>Sollzustand=voll=100%</span> </div></td>
+    <td></td>
+    <td>40 h</td>
+    <td style="background-color:rgb(200,200,200)"><div class="tooltip">N/A<span class="tooltiptext"></span> </div></td>
+    <td style="background-color:rgb(255, 0, 0)"><div class="tooltip">2020-08-02<span class="tooltiptext">No assignment scheduled</span> </div></td>
+    <td>5</td>
+  </tr>
+  <tr>
+    <td><input type="checkbox" class="ch1"  onclick="a[65]=65;"><br></td>
+    <td>[65 OP] Geraeteblech MK FKL [Fluidplan Nr.:50.10E]</td>
+    <td>  <div class="tooltip">Filter N2 Schneidgas (Polyglas) kontrollieren/ ggf. tauschen<span class="tooltiptext">Details: Bedarfsfall liegt nur bei Verschmutzung vor<br>Ersatzteil: 365785<br>Werkzeug: NaN</span> </div></td>
+    <td>Insp</td>
+    <td></td>
+    <td>40 h</td>
+    <td style="background-color:rgb(200,200,200)"><div class="tooltip">N/A<span class="tooltiptext"></span> </div></td>
+    <td style="background-color:rgb(255, 0, 0)"><div class="tooltip">2020-08-02<span class="tooltiptext">No assignment scheduled</span> </div></td>
+    <td>(10)</td>
+  </tr>
+  <tr>
+    <td><input type="checkbox" class="ch1"  onclick="a[66]=66;"><br></td>
+    <td>[66 OP] Geraeteblech MK FKL [Fluidplan Nr.:52.1E]</td>
+    <td>  <div class="tooltip">Filter 3. Schneidgas (Polyglas) kontrollieren/ ggf. tauschen<span class="tooltiptext">Details: Bedarfsfall liegt nur bei Verschmutzung vor<br>Ersatzteil: 365785<br>Werkzeug: NaN</span> </div></td>
+    <td>Insp</td>
+    <td></td>
+    <td>40 h</td>
+    <td style="background-color:rgb(200,200,200)"><div class="tooltip">N/A<span class="tooltiptext"></span> </div></td>
+    <td style="background-color:rgb(255, 0, 0)"><div class="tooltip">2020-08-02<span class="tooltiptext">No assignment scheduled</span> </div></td>
+    <td>(10)</td>
+  </tr>
+  <tr>
+    <td><input type="checkbox" class="ch1"  onclick="a[67]=67;"><br></td>
+    <td>[67 SC] Lichtschranken</td>
+    <td>  <div class="tooltip">pruefen/ ggf. Reinigen<span class="tooltiptext">Details: Die einwandfreie Funktion der Lichtschranke ist regelmaessig aus Sicherheitsgruenden zu pruefen und aufrecht zu erhalten. Der gesetzlich  notwendige Nachweis wird ueblcherweise vom Herstelle der Lichtschranke durchgefuehrt. Die Anforderung an die Pruefung und Intervalle sind laenderspezifisch.<br>Ersatzteil: SP MAT6565507<br>Werkzeug: Weicher Lappen oder Watte/ Alkohol (30 %).</span> </div></td>
+    <td>Insp</td>
+    <td></td>
+    <td>40 h</td>
+    <td style="background-color:rgb(200,200,200)"><div class="tooltip">N/A<span class="tooltiptext"></span> </div></td>
+    <td style="background-color:rgb(255, 0, 0)"><div class="tooltip">2020-08-02<span class="tooltiptext">No assignment scheduled</span> </div></td>
+    <td>(10)</td>
+  </tr>
+  <tr>
+    <td><input type="checkbox" class="ch1"  onclick="a[69]=69;"><br></td>
+    <td>[69 SD] Lichtschranken</td>
+    <td>  <div class="tooltip">pruefen/ ggf. reinigen<span class="tooltiptext">Details: NaN<br>Ersatzteil: NaN<br>Werkzeug: Weicher Lappen oder Watte/ Alkohol (30 %).</span> </div></td>
+    <td>Insp</td>
+    <td></td>
+    <td>40 h</td>
+    <td style="background-color:rgb(200,200,200)"><div class="tooltip">N/A<span class="tooltiptext"></span> </div></td>
+    <td style="background-color:rgb(255, 0, 0)"><div class="tooltip">2020-08-02<span class="tooltiptext">No assignment scheduled</span> </div></td>
+    <td>(5)</td>
+  </tr>
+  <tr>
+    <td><input type="checkbox" class="ch1"  onclick="a[1]=1;"><br></td>
+    <td>[1 CO] Kuehlaggregat</td>
+    <td>  <div class="tooltip">Filtermatte kontrollieren/ ggf. tauschen<span class="tooltiptext">Details: NaN<br>Ersatzteil: Gueltig bis Serienstand  PLL01 _V01.08.00<br>Werkzeug: NaN</span> </div></td>
+    <td>Insp</td>
+    <td></td>
+    <td>100 h</td>
+    <td style="background-color:rgb(200,200,200)"><div class="tooltip">N/A<span class="tooltiptext"></span> </div></td>
+    <td style="background-color:rgb(176.398952, 255.000000, 0)"><div class="tooltip">2020-08-10<span class="tooltiptext">No assignment scheduled</span> </div></td>
+    <td>(10)</td>
+  </tr>
+  <tr>
+    <td><input type="checkbox" class="ch1"  onclick="a[42]=42;"><br></td>
+    <td>[42 MI] Schlackeschubladen</td>
+    <td>  <div class="tooltip">Gummilappen auf Beschaedigung pruefen<span class="tooltiptext">Details: NaN<br>Ersatzteil: Sealing plate (2368987) 4xSchraube (1704160) 8x<br>Werkzeug: NaN</span> </div></td>
+    <td>Insp</td>
+    <td></td>
+    <td>30 T</td>
+    <td style="background-color:rgb(200,200,200)"><div class="tooltip">N/A<span class="tooltiptext"></span> </div></td>
+    <td style="background-color:rgb(0.000000, 255.000000, 0)"><div class="tooltip">2020-08-27<span class="tooltiptext">No assignment scheduled</span> </div></td>
+    <td>(10)</td>
+  </tr>
+  <tr>
+    <td><input type="checkbox" class="ch1"  onclick="a[9]=9;"><br></td>
+    <td>[9 EN] Schutzkabine</td>
+    <td>  <div class="tooltip">Laserschutzfenster reinigen<span class="tooltiptext">Details: Reinigung mit Intensivreiniger und anschliessende Antistatikbehandlung mit Antistatikreiniger<br>Ersatzteil: Kunststoff Intensiv-Reiniger UBA 0197 0062/ Fa. Burnus GmbH (1672919)Antistatischer Kunststoff Reiniger und Pfleger UBA 0197 0057/ Fa. Burnus GmbH (1672922)<br>Werkzeug: NaN</span> </div></td>
+    <td>Y/N</td>
+    <td></td>
+    <td>500 h</td>
+    <td style="background-color:rgb(200,200,200)"><div class="tooltip">N/A<span class="tooltiptext"></span> </div></td>
+    <td style="background-color:rgb(0.000000, 255.000000, 0)"><div class="tooltip">2020-09-29<span class="tooltiptext">No assignment scheduled</span> </div></td>
+    <td>(5)</td>
+  </tr>
+  <tr>
+    <td><input type="checkbox" class="ch1"  onclick="a[12]=12;"><br></td>
+    <td>[12 ES] Kompaktentstauber</td>
+    <td>  <div class="tooltip">Austritt im Reingasraum pruefen<span class="tooltiptext">Details: NaN<br>Ersatzteil: SP MAT6565466<br>Werkzeug: Trittleiter</span> </div></td>
+    <td>Insp</td>
+    <td></td>
+    <td>500 h</td>
+    <td style="background-color:rgb(200,200,200)"><div class="tooltip">N/A<span class="tooltiptext"></span> </div></td>
+    <td style="background-color:rgb(0.000000, 255.000000, 0)"><div class="tooltip">2020-09-29<span class="tooltiptext">No assignment scheduled</span> </div></td>
+    <td>(5)</td>
+  </tr>
+  <tr>
+    <td><input type="checkbox" class="ch1"  onclick="a[13]=13;"><br></td>
+    <td>[13 ES] Kompaktentstauber</td>
+    <td>  <div class="tooltip">Funktion der Abreinigungsventile (akustisch) kontrollieren<span class="tooltiptext">Details: NaN<br>Ersatzteil: SP MAT6565467<br>Werkzeug: NaN</span> </div></td>
+    <td>Insp</td>
+    <td></td>
+    <td>500 h</td>
+    <td style="background-color:rgb(200,200,200)"><div class="tooltip">N/A<span class="tooltiptext"></span> </div></td>
+    <td style="background-color:rgb(0.000000, 255.000000, 0)"><div class="tooltip">2020-09-29<span class="tooltiptext">No assignment scheduled</span> </div></td>
+    <td>10</td>
+  </tr>
+  <tr>
+    <td><input type="checkbox" class="ch1"  onclick="a[14]=14;"><br></td>
+    <td>[14 ES] Kompaktentstauber</td>
+    <td>  <div class="tooltip">Funken-Vorabscheider (Zyklonkammer)  kontrollieren<span class="tooltiptext">Details: NaN<br>Ersatzteil: SP MAT6565468<br>Werkzeug: Atemschutz/ Schutzanzug</span> </div></td>
+    <td>Insp</td>
+    <td></td>
+    <td>500 h</td>
+    <td style="background-color:rgb(200,200,200)"><div class="tooltip">N/A<span class="tooltiptext"></span> </div></td>
+    <td style="background-color:rgb(0.000000, 255.000000, 0)"><div class="tooltip">2020-09-29<span class="tooltiptext">No assignment scheduled</span> </div></td>
+    <td>(10)</td>
+  </tr>
+  <tr>
+    <td><input type="checkbox" class="ch1"  onclick="a[21]=21;"><br></td>
+    <td>[21 IE] Kompaktentstauber</td>
+    <td>  <div class="tooltip">Rohrbogen und Saugleitung reinigen<span class="tooltiptext">Details: Spannverschluss am Rohrbogen hinter dem Feinstaubbehaelter oeffnen.<br>Ersatzteil: SP MAT6565469<br>Werkzeug: NaN</span> </div></td>
+    <td>Y/N</td>
+    <td></td>
+    <td>500 h</td>
+    <td style="background-color:rgb(200,200,200)"><div class="tooltip">N/A<span class="tooltiptext"></span> </div></td>
+    <td style="background-color:rgb(0.000000, 255.000000, 0)"><div class="tooltip">2020-09-29<span class="tooltiptext">No assignment scheduled</span> </div></td>
+    <td>(20)</td>
+  </tr>
+  <tr>
+    <td><input type="checkbox" class="ch1"  onclick="a[25]=25;"><br></td>
+    <td>[25 MH] Palettenwechsler</td>
+    <td>  <div class="tooltip">Kalibrierplatte und Duesenreinigungsbuerste reinigen/ ggf. tauschen<span class="tooltiptext">Details: abhaengig von Wartungs ID 14/ 101/ 102<br>Ersatzteil: SP MAT6565482<br>Werkzeug: NaN</span> </div></td>
+    <td>Insp</td>
+    <td></td>
+    <td>500 h</td>
+    <td style="background-color:rgb(200,200,200)"><div class="tooltip">N/A<span class="tooltiptext"></span> </div></td>
+    <td style="background-color:rgb(0.000000, 255.000000, 0)"><div class="tooltip">2020-09-29<span class="tooltiptext">No assignment scheduled</span> </div></td>
+    <td>(10)</td>
+  </tr>
+  <tr>
+    <td><input type="checkbox" class="ch1"  onclick="a[31]=31;"><br></td>
+    <td>[31 MH] Palette</td>
+    <td>  <div class="tooltip">Bolzen kontrollieren<span class="tooltiptext">Details: NaN<br>Ersatzteil: SP MAT6565489<br>Werkzeug: NaN</span> </div></td>
+    <td>Insp</td>
+    <td></td>
+    <td>500 h</td>
+    <td style="background-color:rgb(200,200,200)"><div class="tooltip">N/A<span class="tooltiptext"></span> </div></td>
+    <td style="background-color:rgb(0.000000, 255.000000, 0)"><div class="tooltip">2020-09-29<span class="tooltiptext">No assignment scheduled</span> </div></td>
+    <td>(10)</td>
+  </tr>
+  <tr>
+    <td><input type="checkbox" class="ch1"  onclick="a[32]=32;"><br></td>
+    <td>[32 MH] Anschlagsystem</td>
+    <td>  <div class="tooltip">Blechanschlaege kontrollieren<span class="tooltiptext">Details: NaN<br>Ersatzteil: SP MAT6565490<br>Werkzeug: NaN</span> </div></td>
+    <td>Insp</td>
+    <td></td>
+    <td>500 h</td>
+    <td style="background-color:rgb(200,200,200)"><div class="tooltip">N/A<span class="tooltiptext"></span> </div></td>
+    <td style="background-color:rgb(0.000000, 255.000000, 0)"><div class="tooltip">2020-09-29<span class="tooltiptext">No assignment scheduled</span> </div></td>
+    <td>(10)</td>
+  </tr>
+  <tr>
+    <td><input type="checkbox" class="ch1"  onclick="a[51]=51;"><br></td>
+    <td>[51 NO] Automatischer Duesenwechsler (Option)</td>
+    <td>  <div class="tooltip">Kalibrierplatte und Duesenreinigungsbuerste reinigen<span class="tooltiptext">Details: abhaengig von Wartungs IDl 13<br>Ersatzteil: SP MAT6565508<br>Werkzeug: NaN</span> </div></td>
+    <td>Insp</td>
+    <td></td>
+    <td>500 h</td>
+    <td style="background-color:rgb(200,200,200)"><div class="tooltip">N/A<span class="tooltiptext"></span> </div></td>
+    <td style="background-color:rgb(0.000000, 255.000000, 0)"><div class="tooltip">2020-09-29<span class="tooltiptext">No assignment scheduled</span> </div></td>
+    <td>(10)</td>
+  </tr>
+  <tr>
+    <td><input type="checkbox" class="ch1"  onclick="a[54]=54;"><br></td>
+    <td>[54 NO] Automatischer Duesenwechsler (Option)</td>
+    <td>  <div class="tooltip">Kalibrierplatte reinigen<span class="tooltiptext">Details: abhaengig von Wartungs IDl 13<br>Ersatzteil: SP MAT6565508<br>Werkzeug: NaN</span> </div></td>
+    <td>Insp</td>
+    <td></td>
+    <td>500 h</td>
+    <td style="background-color:rgb(200,200,200)"><div class="tooltip">N/A<span class="tooltiptext"></span> </div></td>
+    <td style="background-color:rgb(0.000000, 255.000000, 0)"><div class="tooltip">2020-09-29<span class="tooltiptext">No assignment scheduled</span> </div></td>
+    <td>(2)</td>
+  </tr>
+  <tr>
+    <td><input type="checkbox" class="ch1"  onclick="a[55]=55;"><br></td>
+    <td>[55 NO] Automatischer Duesenwechsler (Option)</td>
+    <td>  <div class="tooltip">Duesenreinigungsbuerste reinigen/ ggf. tauschen<span class="tooltiptext">Details: abhaengig von Wartungs IDl 13<br>Ersatzteil: SP MAT6565509<br>Werkzeug: NaN</span> </div></td>
+    <td>Insp</td>
+    <td></td>
+    <td>500 h</td>
+    <td style="background-color:rgb(200,200,200)"><div class="tooltip">N/A<span class="tooltiptext"></span> </div></td>
+    <td style="background-color:rgb(0.000000, 255.000000, 0)"><div class="tooltip">2020-09-29<span class="tooltiptext">No assignment scheduled</span> </div></td>
+    <td>(2)</td>
+  </tr>
+  <tr>
+    <td><input type="checkbox" class="ch1"  onclick="a[57]=57;"><br></td>
+    <td>[57 NO] Automatischer Duesenwechsler (Option)</td>
+    <td>  <div class="tooltip">Fuehrung des Strahlschutzblechs reinigen<span class="tooltiptext">Details: NaN<br>Ersatzteil: NaN<br>Werkzeug: NaN</span> </div></td>
+    <td>Insp</td>
+    <td></td>
+    <td>500 h</td>
+    <td style="background-color:rgb(200,200,200)"><div class="tooltip">N/A<span class="tooltiptext"></span> </div></td>
+    <td style="background-color:rgb(0.000000, 255.000000, 0)"><div class="tooltip">2020-09-29<span class="tooltiptext">No assignment scheduled</span> </div></td>
+    <td>(20)</td>
+  </tr>
+  <tr>
+    <td><input type="checkbox" class="ch1"  onclick="a[19]=19;"><br></td>
+    <td>[19 GC] Kamera zur Prozessbeobachtung</td>
+    <td>  <div class="tooltip">Schutzglas kontrollieren/ ggf. reinigen<span class="tooltiptext">Details: NaN<br>Ersatzteil: NaN<br>Werkzeug: NaN</span> </div></td>
+    <td>Insp</td>
+    <td></td>
+    <td>1000 h</td>
+    <td style="background-color:rgb(200,200,200)"><div class="tooltip">N/A<span class="tooltiptext"></span> </div></td>
+    <td style="background-color:rgb(0.000000, 255.000000, 0)"><div class="tooltip">2020-11-30<span class="tooltiptext">No assignment scheduled</span> </div></td>
+    <td>(5)</td>
+  </tr>
+  <tr>
+    <td><input type="checkbox" class="ch1"  onclick="a[23]=23;"><br></td>
+    <td>[23 MB] Palettentor</td>
+    <td>  <div class="tooltip">Linearfuehrungen reinigen und schmieren<span class="tooltiptext">Details: Vier Fuehrungswagen mit TrichterschmiernippelOptional auch Microlube_GL261(0355132)  <br>Ersatzteil: Microlube_GB00 (0111780) 0/1x<br>Werkzeug: - Tuch- Reinigungsmittel- Stoss-Fettpresse (0068624)</span> </div></td>
+    <td>Insp</td>
+    <td></td>
+    <td>1000 h</td>
+    <td style="background-color:rgb(200,200,200)"><div class="tooltip">N/A<span class="tooltiptext"></span> </div></td>
+    <td style="background-color:rgb(0.000000, 255.000000, 0)"><div class="tooltip">2020-11-30<span class="tooltiptext">No assignment scheduled</span> </div></td>
+    <td>(20)</td>
+  </tr>
+  <tr>
+    <td><input type="checkbox" class="ch1"  onclick="a[33]=33;"><br></td>
+    <td>[33 MH] Paletteneinzug</td>
+    <td>  <div class="tooltip">Triebstockrad schmieren<span class="tooltiptext">Details: NaN<br>Ersatzteil: Trockenschmiermittel Dry Lube (0367578)<br>Werkzeug: NaN</span> </div></td>
+    <td>Insp</td>
+    <td></td>
+    <td>1000 h</td>
+    <td style="background-color:rgb(200,200,200)"><div class="tooltip">N/A<span class="tooltiptext"></span> </div></td>
+    <td style="background-color:rgb(0.000000, 255.000000, 0)"><div class="tooltip">2020-11-30<span class="tooltiptext">No assignment scheduled</span> </div></td>
+    <td>(15)</td>
+  </tr>
+  <tr>
+    <td><input type="checkbox" class="ch1"  onclick="a[34]=34;"><br></td>
+    <td>[34 MH] Palette</td>
+    <td>  <div class="tooltip">Triebstockstange schmieren<span class="tooltiptext">Details: NaN<br>Ersatzteil: Trockenschmiermittel Dry Lube (0367578)<br>Werkzeug: NaN</span> </div></td>
+    <td>Insp</td>
+    <td></td>
+    <td>1000 h</td>
+    <td style="background-color:rgb(200,200,200)"><div class="tooltip">N/A<span class="tooltiptext"></span> </div></td>
+    <td style="background-color:rgb(0.000000, 255.000000, 0)"><div class="tooltip">2020-11-30<span class="tooltiptext">No assignment scheduled</span> </div></td>
+    <td>(15)</td>
+  </tr>
+  <tr>
+    <td><input type="checkbox" class="ch1"  onclick="a[47]=47;"><br></td>
+    <td>[47 MU] X-EnergieketteY-EnergieketteZ1-Energiekette</td>
+    <td>  <div class="tooltip">Sichtkontrolle Gelenke/ Kabel und Schlaeuche kontrollieren<span class="tooltiptext">Details: NaN<br>Ersatzteil: SP MAT6565503<br>Werkzeug: NaN</span> </div></td>
+    <td>Insp</td>
+    <td></td>
+    <td>1000 h</td>
+    <td style="background-color:rgb(200,200,200)"><div class="tooltip">N/A<span class="tooltiptext"></span> </div></td>
+    <td style="background-color:rgb(0.000000, 255.000000, 0)"><div class="tooltip">2020-11-30<span class="tooltiptext">No assignment scheduled</span> </div></td>
+    <td>(5)</td>
+  </tr>
+  <tr>
+    <td><input type="checkbox" class="ch1"  onclick="a[48]=48;"><br></td>
+    <td>[48 MU] Z2-Energiekette</td>
+    <td>  <div class="tooltip">Sichtkontrolle Gelenke/ Kabel und Schlaeuche kontrollieren<span class="tooltiptext">Details: NaN<br>Ersatzteil: SP MAT6565504<br>Werkzeug: NaN</span> </div></td>
+    <td>Insp</td>
+    <td></td>
+    <td>1000 h</td>
+    <td style="background-color:rgb(200,200,200)"><div class="tooltip">N/A<span class="tooltiptext"></span> </div></td>
+    <td style="background-color:rgb(0.000000, 255.000000, 0)"><div class="tooltip">2020-11-30<span class="tooltiptext">No assignment scheduled</span> </div></td>
+    <td>(20)</td>
+  </tr>
+  <tr>
+    <td><input type="checkbox" class="ch1"  onclick="a[15]=15;"><br></td>
+    <td>[15 ES] Kompaktentstauber</td>
+    <td>  <div class="tooltip">Druckminderer und Druckluftversorgung an der Wartungseinheit pruefen<span class="tooltiptext">Details: NaN<br>Ersatzteil: SP MAT6565470<br>Werkzeug: NaN</span> </div></td>
+    <td>  <div class="tooltip">5<span class="tooltiptext">Druck(Handte) = 5 ñ 0/1bar</span> </div></td>
+    <td></td>
+    <td>2000 h</td>
+    <td style="background-color:rgb(200,200,200)"><div class="tooltip">N/A<span class="tooltiptext"></span> </div></td>
+    <td style="background-color:rgb(0.000000, 255.000000, 0)"><div class="tooltip">2021-04-04<span class="tooltiptext">No assignment scheduled</span> </div></td>
+    <td>2</td>
+  </tr>
+  <tr>
+    <td><input type="checkbox" class="ch1"  onclick="a[16]=16;"><br></td>
+    <td>[16 ES] Kompaktentstauber</td>
+    <td>  <div class="tooltip">Filter 40æm der Wartungseinheit kontrollieren/ ggf. tauschen<span class="tooltiptext">Details: NaN<br>Ersatzteil: Filterpatrone 40æ MS4 (0364033) 1x<br>Werkzeug: NaN</span> </div></td>
+    <td>Y/N</td>
+    <td></td>
+    <td>2000 h</td>
+    <td style="background-color:rgb(200,200,200)"><div class="tooltip">N/A<span class="tooltiptext"></span> </div></td>
+    <td style="background-color:rgb(0.000000, 255.000000, 0)"><div class="tooltip">2021-04-04<span class="tooltiptext">No assignment scheduled</span> </div></td>
+    <td>(2)</td>
+  </tr>
+  <tr>
+    <td><input type="checkbox" class="ch1"  onclick="a[26]=26;"><br></td>
+    <td>[26 MH] Paletteneinzug</td>
+    <td>  <div class="tooltip">Kette und Mitnehmer schmieren<span class="tooltiptext">Details: Palette in Position bringen (Pal.B in Maschine).Hauptschalter aus.Stege entfernen<br>Ersatzteil: SP MAT6565483<br>Werkzeug: NaN</span> </div></td>
+    <td>Y/N</td>
+    <td></td>
+    <td>2000 h</td>
+    <td style="background-color:rgb(200,200,200)"><div class="tooltip">N/A<span class="tooltiptext"></span> </div></td>
+    <td style="background-color:rgb(0.000000, 255.000000, 0)"><div class="tooltip">2021-04-04<span class="tooltiptext">No assignment scheduled</span> </div></td>
+    <td>(15)</td>
+  </tr>
+  <tr>
+    <td><input type="checkbox" class="ch1"  onclick="a[27]=27;"><br></td>
+    <td>[27 MH] Palettenwechsler</td>
+    <td>  <div class="tooltip">Laufrollen der Paletten/ Buersten und Fuehrungsbahnen kontrollieren/ ggf. reinigen<span class="tooltiptext">Details: Maschine in Postition bringen.Hauptschalter -aus- 24V Netzteil Bremse des PaWe Motor lueften.<br>Ersatzteil: SP MAT6565486<br>Werkzeug: NaN</span> </div></td>
+    <td>Insp</td>
+    <td></td>
+    <td>2000 h</td>
+    <td style="background-color:rgb(200,200,200)"><div class="tooltip">N/A<span class="tooltiptext"></span> </div></td>
+    <td style="background-color:rgb(0.000000, 255.000000, 0)"><div class="tooltip">2021-04-04<span class="tooltiptext">No assignment scheduled</span> </div></td>
+    <td>(60)</td>
+  </tr>
+  <tr>
+    <td><input type="checkbox" class="ch1"  onclick="a[43]=43;"><br></td>
+    <td>[43 MU] Faltenbalg</td>
+    <td>  <div class="tooltip">Faltenbaelge der X-/ Y- und Z-Achsen kontrollieren/ ggf. reinigen<span class="tooltiptext">Details: NaN<br>Ersatzteil: SP MAT6565497<br>Werkzeug: Staubsauger</span> </div></td>
+    <td>Insp</td>
+    <td></td>
+    <td>2000 h</td>
+    <td style="background-color:rgb(200,200,200)"><div class="tooltip">N/A<span class="tooltiptext"></span> </div></td>
+    <td style="background-color:rgb(0.000000, 255.000000, 0)"><div class="tooltip">2021-04-04<span class="tooltiptext">No assignment scheduled</span> </div></td>
+    <td>(60)</td>
+  </tr>
+  <tr>
+    <td><input type="checkbox" class="ch1"  onclick="a[44]=44;"><br></td>
+    <td>[44 MU] Zahnstangen X-Achse</td>
+    <td>  <div class="tooltip">Zahnstangen reinigen<span class="tooltiptext">Details: Paletten raus.Schottbleche raus.Hauptschalter aus.Schmieren und Bewegungseinheit schieben um alle Bereiche zu reinigen.<br>Ersatzteil: SP MAT6565498<br>Werkzeug: NaN</span> </div></td>
+    <td>Insp</td>
+    <td></td>
+    <td>2000 h</td>
+    <td style="background-color:rgb(200,200,200)"><div class="tooltip">N/A<span class="tooltiptext"></span> </div></td>
+    <td style="background-color:rgb(0.000000, 255.000000, 0)"><div class="tooltip">2021-04-04<span class="tooltiptext">No assignment scheduled</span> </div></td>
+    <td>(120)</td>
+  </tr>
+  <tr>
+    <td><input type="checkbox" class="ch1"  onclick="a[45]=45;"><br></td>
+    <td>[45 MU] Bewegungseinheit</td>
+    <td>  <div class="tooltip">Fettauffangwanne reinigen<span class="tooltiptext">Details: NaN<br>Ersatzteil: SP MAT6565499<br>Werkzeug: NaN</span> </div></td>
+    <td>Insp</td>
+    <td></td>
+    <td>2000 h</td>
+    <td style="background-color:rgb(200,200,200)"><div class="tooltip">N/A<span class="tooltiptext"></span> </div></td>
+    <td style="background-color:rgb(0.000000, 255.000000, 0)"><div class="tooltip">2021-04-04<span class="tooltiptext">No assignment scheduled</span> </div></td>
+    <td>(15)</td>
+  </tr>
+  <tr>
+    <td><input type="checkbox" class="ch1"  onclick="a[46]=46;"><br></td>
+    <td>[46 MU] Bewegungseinheit</td>
+    <td>  <div class="tooltip">Spritzschutzblech Z-Achse reinigen<span class="tooltiptext">Details: innen <br>Ersatzteil: SP MAT6565500<br>Werkzeug: NaN</span> </div></td>
+    <td>Insp</td>
+    <td></td>
+    <td>2000 h</td>
+    <td style="background-color:rgb(200,200,200)"><div class="tooltip">N/A<span class="tooltiptext"></span> </div></td>
+    <td style="background-color:rgb(0.000000, 255.000000, 0)"><div class="tooltip">2021-04-04<span class="tooltiptext">No assignment scheduled</span> </div></td>
+    <td>(15)</td>
+  </tr>
+  <tr>
+    <td><input type="checkbox" class="ch1"  onclick="a[49]=49;"><br></td>
+    <td>[49 MU] Y-Achse Magnete/ Motor/ Messsystem/ Fuehrungsbahnabdeckung/ Abdeckungen und Bahnabstreifer</td>
+    <td>  <div class="tooltip">Sichtkontrolle/ ggf. reinigen<span class="tooltiptext">Details: NaN<br>Ersatzteil: SP MAT6565505<br>Werkzeug: NaN</span> </div></td>
+    <td>Insp</td>
+    <td></td>
+    <td>2000 h</td>
+    <td style="background-color:rgb(200,200,200)"><div class="tooltip">N/A<span class="tooltiptext"></span> </div></td>
+    <td style="background-color:rgb(0.000000, 255.000000, 0)"><div class="tooltip">2021-04-04<span class="tooltiptext">No assignment scheduled</span> </div></td>
+    <td>(5)</td>
+  </tr>
+  <tr>
+    <td><input type="checkbox" class="ch1"  onclick="a[52]=52;"><br></td>
+    <td>[52 NO] Automatischer Duesenwechsler (Option)</td>
+    <td>  <div class="tooltip">Abdeckblech der Antriebseinheit reinigen<span class="tooltiptext">Details: NaN<br>Ersatzteil: SP MAT6565509<br>Werkzeug: Staubsauger</span> </div></td>
+    <td>Insp</td>
+    <td></td>
+    <td>2000 h</td>
+    <td style="background-color:rgb(200,200,200)"><div class="tooltip">N/A<span class="tooltiptext"></span> </div></td>
+    <td style="background-color:rgb(0.000000, 255.000000, 0)"><div class="tooltip">2021-04-04<span class="tooltiptext">No assignment scheduled</span> </div></td>
+    <td>(10)</td>
+  </tr>
+  <tr>
+    <td><input type="checkbox" class="ch1"  onclick="a[60]=60;"><br></td>
+    <td>[60 OP] Geraeteblech MK FKL [Fluidplan Nr.:1.3]</td>
+    <td>  <div class="tooltip">Eingangsregler Betriebsdruck pruefen/ ggf. einstellen<span class="tooltiptext">Details: NaN<br>Ersatzteil: NaN<br>Werkzeug: NaN</span> </div></td>
+    <td>  <div class="tooltip">5<span class="tooltiptext">Druck = 5bar ñ 0/5mm</span> </div></td>
+    <td></td>
+    <td>2000 h</td>
+    <td style="background-color:rgb(200,200,200)"><div class="tooltip">N/A<span class="tooltiptext"></span> </div></td>
+    <td style="background-color:rgb(0.000000, 255.000000, 0)"><div class="tooltip">2021-04-04<span class="tooltiptext">No assignment scheduled</span> </div></td>
+    <td>(3)</td>
+  </tr>
+  <tr>
+    <td><input type="checkbox" class="ch1"  onclick="a[20]=20;"><br></td>
+    <td>[20 GC] Bedienpult</td>
+    <td>  <div class="tooltip">Achsdiagnose durchfuehren<span class="tooltiptext">Details: NaN<br>Ersatzteil: Programm Axdiag.LST ausfuehren und Ergebnis an die Email-Adresse Axdiag@Trumpf.com schicken<br>Werkzeug: NaN</span> </div></td>
+    <td>Y/N</td>
+    <td></td>
+    <td>365 T</td>
+    <td style="background-color:rgb(200,200,200)"><div class="tooltip">N/A<span class="tooltiptext"></span> </div></td>
+    <td style="background-color:rgb(0.000000, 255.000000, 0)"><div class="tooltip">2021-07-28<span class="tooltiptext">No assignment scheduled</span> </div></td>
+    <td>(30)</td>
+  </tr>
+  <tr>
+    <td><input type="checkbox" class="ch1"  onclick="a[68]=68;"><br></td>
+    <td>[68 SC] Not-Halt Schlagtaster</td>
+    <td>  <div class="tooltip">Funktion pruefen<span class="tooltiptext">Details: NaN<br>Ersatzteil: SP MAT6565508<br>Werkzeug: NaN</span> </div></td>
+    <td>Insp</td>
+    <td></td>
+    <td>365 T</td>
+    <td style="background-color:rgb(200,200,200)"><div class="tooltip">N/A<span class="tooltiptext"></span> </div></td>
+    <td style="background-color:rgb(0.000000, 255.000000, 0)"><div class="tooltip">2021-07-28<span class="tooltiptext">No assignment scheduled</span> </div></td>
+    <td>(5)</td>
+  </tr>
+  <tr>
+    <td><input type="checkbox" class="ch1"  onclick="a[3]=3;"><br></td>
+    <td>[3 CO] Wassertank im Kuehlaggregat</td>
+    <td>  <div class="tooltip">Leitfaehigkeit pruefen<span class="tooltiptext">Details: NaN<br>Ersatzteil: NaN<br>Werkzeug: NaN</span> </div></td>
+    <td>  <div class="tooltip">10<span class="tooltiptext">Leitfaehigkeit =< 10 uS</span> </div></td>
+    <td>20</td>
+    <td>365 T</td>
+    <td style="background-color:rgb(0,255,0)"><div class="tooltip">OK<span class="tooltiptext">Assign#: 661134<br>LastAssign:30615<br>Comments:20</span> </div></td>
+    <td style="background-color:rgb(0.000000, 255.000000, 0)"><div class="tooltip">2021-07-29<span class="tooltiptext">No assignment scheduled</span> </div></td>
+    <td>5</td>
+  </tr>
+  <tr>
+    <td><input type="checkbox" class="ch1"  onclick="a[7]=7;"><br></td>
+    <td>[7 CU] Schneideinheit</td>
+    <td>  <div class="tooltip">Schutzglas (KL59) reinigen/ Fleckbild<span class="tooltiptext">Details: NaN<br>Ersatzteil: Schutzglas D34: Schutzglas D34x5 S04 T1064 T630 Q/ Mat.-Nr. 1614767Reinigungskoffer/ LED-Lenser V2 Power-Chip (+TRUMPF Logo) 1311894<br>Werkzeug: NaN</span> </div></td>
+    <td>Insp</td>
+    <td></td>
+    <td>730 T</td>
+    <td style="background-color:rgb(200,200,200)"><div class="tooltip">N/A<span class="tooltiptext"></span> </div></td>
+    <td style="background-color:rgb(0.000000, 255.000000, 0)"><div class="tooltip">2022-07-28<span class="tooltiptext">No assignment scheduled</span> </div></td>
+    <td>(15)</td>
+  </tr>
+  <tr>
+    <td><input type="checkbox" class="ch1"  onclick="a[18]=18;"><br></td>
+    <td>[18 ES] Kompaktentstauber</td>
+    <td>  <div class="tooltip">Rauchmelder tauschen<span class="tooltiptext">Details: NaN<br>Ersatzteil: Rauchmelder optisch (2078863) 1x<br>Werkzeug: NaN</span> </div></td>
+    <td>Y/N</td>
+    <td></td>
+    <td>730 T</td>
+    <td style="background-color:rgb(200,200,200)"><div class="tooltip">N/A<span class="tooltiptext"></span> </div></td>
+    <td style="background-color:rgb(0.000000, 255.000000, 0)"><div class="tooltip">2022-07-28<span class="tooltiptext">No assignment scheduled</span> </div></td>
+    <td>(5)</td>
+  </tr>
+  <tr>
+    <td><input type="checkbox" class="ch1"  onclick="a[56]=56;"><br></td>
+    <td>[56 NO] Automatischer Duesenwechsler (Option)</td>
+    <td>  <div class="tooltip">Teleskopfuehrungsschienen reinigen und schmieren<span class="tooltiptext">Details: Optional auch Microlube_GL261(0355132)<br>Ersatzteil: Microlube_GB00 (0111780) 0/1x<br>Werkzeug: NaN</span> </div></td>
+    <td>Insp</td>
+    <td></td>
+    <td>1000 T</td>
+    <td style="background-color:rgb(200,200,200)"><div class="tooltip">N/A<span class="tooltiptext"></span> </div></td>
+    <td style="background-color:rgb(0.000000, 255.000000, 0)"><div class="tooltip">2023-04-24<span class="tooltiptext">No assignment scheduled</span> </div></td>
+    <td>(60)</td>
+  </tr>
+  <tr>
+    <td><input type="checkbox" class="ch1"  onclick="a[2]=2;"><br></td>
+    <td>[2 CO] Kuehlaggregat</td>
+    <td>  <div class="tooltip">Kuehlwasser nachfuellen<span class="tooltiptext">Details: NaN<br>Ersatzteil: DI-Wasser<br>Werkzeug: NaN</span> </div></td>
+    <td>  <div class="tooltip">100<span class="tooltiptext">NaN</span> </div></td>
+    <td></td>
+    <td>0 M</td>
+    <td style="background-color:rgb(200,200,200)"><div class="tooltip">N/A<span class="tooltiptext"></span> </div></td>
+    <td>  </td>
+    <td>5</td>
+  </tr>
+  <tr>
+    <td><input type="checkbox" class="ch1"  onclick="a[8]=8;"><br></td>
+    <td>[8 DP] Geraeteblech MK FKL [Fluidplan Nr.:85.18]</td>
+    <td>  <div class="tooltip">DI-Wasser nachfuellen<span class="tooltiptext">Details: NaN<br>Ersatzteil: 0097490 Demineralisiertes Wasser 20KG Gebinde<br>Werkzeug: NaN</span> </div></td>
+    <td>  <div class="tooltip">100<span class="tooltiptext">NaN</span> </div></td>
+    <td></td>
+    <td>0 M</td>
+    <td style="background-color:rgb(200,200,200)"><div class="tooltip">N/A<span class="tooltiptext"></span> </div></td>
+    <td>  </td>
+    <td>5</td>
+  </tr>
+  <tr>
+    <td><input type="checkbox" class="ch1"  onclick="a[22]=22;"><br></td>
+    <td>[22 LA] Laser</td>
+    <td>  <div class="tooltip">Kuehlwasser nachfuellen<span class="tooltiptext">Details: NaN<br>Ersatzteil: DI-Wasser<br>Werkzeug: NaN</span> </div></td>
+    <td>  <div class="tooltip">100<span class="tooltiptext">NaN</span> </div></td>
+    <td></td>
+    <td>0 M</td>
+    <td style="background-color:rgb(200,200,200)"><div class="tooltip">N/A<span class="tooltiptext"></span> </div></td>
+    <td>  </td>
+    <td>5</td>
+  </tr>
+  <tr>
+    <td><input type="checkbox" class="ch1"  onclick="a[38]=38;"><br></td>
+    <td>[38 MI] Sammelbehaelter fuer Schlacke und Staub</td>
+    <td>  <div class="tooltip">Sammelbehaelter entleeren<span class="tooltiptext">Details: NaN<br>Ersatzteil: NaN<br>Werkzeug: NaN</span> </div></td>
+    <td>Y/N</td>
+    <td></td>
+    <td>0 M</td>
+    <td style="background-color:rgb(200,200,200)"><div class="tooltip">N/A<span class="tooltiptext"></span> </div></td>
+    <td>  </td>
+    <td>(5)</td>
+  </tr>
+  <tr>
+    <td><input type="checkbox" class="ch1"  onclick="a[39]=39;"><br></td>
+    <td>[39 MI] Geraeteblech MK FKL</td>
+    <td>  <div class="tooltip">Schmiermittel Buerstenschmierung Scharnierbandfoerderer nachfuellen<span class="tooltiptext">Details: NaN<br>Ersatzteil: Asseol Topslide AShell Toma X-32Esso Febis K-32<br>Werkzeug: NaN</span> </div></td>
+    <td>  <div class="tooltip">100<span class="tooltiptext">Fuellgrad <br>Sollzustand=voll=100%</span> </div></td>
+    <td></td>
+    <td>0 M</td>
+    <td style="background-color:rgb(200,200,200)"><div class="tooltip">N/A<span class="tooltiptext"></span> </div></td>
+    <td>  </td>
+    <td>5</td>
+  </tr>
+</table>
+</div>
+
+
+<!--****************************************--> 
+<div id="Maintenance" class="tabcontent">
+  <h3>Tasks for the Wartung personal</h3>
+
+   <p><button class="w3-button w3-red">Create mission in MaintenanceX</button></p>
+
+<table id="tables">
+  <tr>
+    <th></th>
+    <th>Wartungsstelle</th>
+    <th>Wartungsaufgabe</th>
+    <th>Soll</th>
+    <th>Ist</th>
+    <th>__Cycle__</th>
+    <th>Zustand</th>
+    <th>___Faellig___</th>
+    <th>  <div class="tooltip">Dauer(NZ)<span class="tooltiptext">Dauer in min<br>[] = HZP</span> </div></th>
+  </tr>
+  <tr>
+    <td><input type="checkbox" class="ch2"  onclick="a[72]=72;"><br></td>
+    <td>[72 CS] Querfoerderband</td>
+    <td>  <div class="tooltip">Bandspannung nachspannen<span class="tooltiptext">Details: NaN<br>Ersatzteil: NaN<br>Werkzeug: NaN</span> </div></td>
+    <td>  <div class="tooltip">27<span class="tooltiptext">Drehmoment = 27Nm</span> </div></td>
+    <td></td>
+    <td>1000 h</td>
+    <td style="background-color:rgb(200,200,200)"><div class="tooltip">N/A<span class="tooltiptext"></span> </div></td>
+    <td style="background-color:rgb(0.000000, 255.000000, 0)"><div class="tooltip">2020-11-30<span class="tooltiptext">No assignment scheduled</span> </div></td>
+    <td>(10)</td>
+  </tr>
+  <tr>
+    <td><input type="checkbox" class="ch2"  onclick="a[78]=78;"><br></td>
+    <td>[78 MI] Laengsfoerderband</td>
+    <td>  <div class="tooltip">Bandspannung nachspannen<span class="tooltiptext">Details: Palette in Position bringen (Pal.B in Maschine).Hauptschalter aus.Stege entfernen<br>Ersatzteil: SP MAT6565497<br>Werkzeug: NaN</span> </div></td>
+    <td>  <div class="tooltip">20<span class="tooltiptext">Drehmoment = 20Nm</span> </div></td>
+    <td></td>
+    <td>1000 h</td>
+    <td style="background-color:rgb(200,200,200)"><div class="tooltip">N/A<span class="tooltiptext"></span> </div></td>
+    <td style="background-color:rgb(0.000000, 255.000000, 0)"><div class="tooltip">2020-11-30<span class="tooltiptext">No assignment scheduled</span> </div></td>
+    <td>(30)</td>
+  </tr>
+  <tr>
+    <td><input type="checkbox" class="ch2"  onclick="a[73]=73;"><br></td>
+    <td>[73 MH] Verrohrung / Verschlauchung</td>
+    <td>  <div class="tooltip">Hydraulikleitungen kontrollieren<span class="tooltiptext">Details: NaN<br>Ersatzteil: SP MAT6565484<br>Werkzeug: NaN</span> </div></td>
+    <td>Insp</td>
+    <td></td>
+    <td>2000 h</td>
+    <td style="background-color:rgb(200,200,200)"><div class="tooltip">N/A<span class="tooltiptext"></span> </div></td>
+    <td style="background-color:rgb(0.000000, 255.000000, 0)"><div class="tooltip">2021-04-04<span class="tooltiptext">No assignment scheduled</span> </div></td>
+    <td>(10)</td>
+  </tr>
+  <tr>
+    <td><input type="checkbox" class="ch2"  onclick="a[75]=75;"><br></td>
+    <td>[75 MH] Palettenwechsler</td>
+    <td>  <div class="tooltip">Parksaeulen schmieren<span class="tooltiptext">Details: NaN<br>Ersatzteil: Trockenschmiermittel Dry Lube (0367578)<br>Werkzeug: NaN</span> </div></td>
+    <td>Insp</td>
+    <td></td>
+    <td>2000 h</td>
+    <td style="background-color:rgb(200,200,200)"><div class="tooltip">N/A<span class="tooltiptext"></span> </div></td>
+    <td style="background-color:rgb(0.000000, 255.000000, 0)"><div class="tooltip">2021-04-04<span class="tooltiptext">No assignment scheduled</span> </div></td>
+    <td>(15)</td>
+  </tr>
+  <tr>
+    <td><input type="checkbox" class="ch2"  onclick="a[76]=76;"><br></td>
+    <td>[76 MH] Paletteneinzug</td>
+    <td>  <div class="tooltip">Antrieb kontrollieren<span class="tooltiptext">Details: NaN<br>Ersatzteil: NaN<br>Werkzeug: NaN</span> </div></td>
+    <td>Insp</td>
+    <td></td>
+    <td>2000 h</td>
+    <td style="background-color:rgb(200,200,200)"><div class="tooltip">N/A<span class="tooltiptext"></span> </div></td>
+    <td style="background-color:rgb(0.000000, 255.000000, 0)"><div class="tooltip">2021-04-04<span class="tooltiptext">No assignment scheduled</span> </div></td>
+    <td>(10)</td>
+  </tr>
+  <tr>
+    <td><input type="checkbox" class="ch2"  onclick="a[77]=77;"><br></td>
+    <td>[77 MH] Fuehrungsgestell</td>
+    <td>  <div class="tooltip">Mechanik Palettentuere schmieren<span class="tooltiptext">Details: NaN<br>Ersatzteil: Trockenschmiermittel Dry Lube (0367578)<br>Werkzeug: NaN</span> </div></td>
+    <td>Insp</td>
+    <td></td>
+    <td>2000 h</td>
+    <td style="background-color:rgb(200,200,200)"><div class="tooltip">N/A<span class="tooltiptext"></span> </div></td>
+    <td style="background-color:rgb(0.000000, 255.000000, 0)"><div class="tooltip">2021-04-04<span class="tooltiptext">No assignment scheduled</span> </div></td>
+    <td>(10)</td>
+  </tr>
+  <tr>
+    <td><input type="checkbox" class="ch2"  onclick="a[79]=79;"><br></td>
+    <td>[79 MU] Schmierung</td>
+    <td>  <div class="tooltip">Schmierleitungen und -anschluesse mit Verteiler und Schmiernippel auf Lufteinschluesse kontrolieren ggf. entlueften<span class="tooltiptext">Details: NaN<br>Ersatzteil: SP MAT6565503<br>Werkzeug: NaN</span> </div></td>
+    <td>Insp</td>
+    <td></td>
+    <td>2000 h</td>
+    <td style="background-color:rgb(200,200,200)"><div class="tooltip">N/A<span class="tooltiptext"></span> </div></td>
+    <td style="background-color:rgb(0.000000, 255.000000, 0)"><div class="tooltip">2021-04-04<span class="tooltiptext">No assignment scheduled</span> </div></td>
+    <td>(10)</td>
+  </tr>
+  <tr>
+    <td><input type="checkbox" class="ch2"  onclick="a[80]=80;"><br></td>
+    <td>[80 OP] Geraeteblech MK FKL [Fluidplan Nr.:1.3E]</td>
+    <td>  <div class="tooltip">Filterpatrone 40æm tauschen<span class="tooltiptext">Details: NaN<br>Ersatzteil: 364032<br>Werkzeug: NaN</span> </div></td>
+    <td>Insp</td>
+    <td></td>
+    <td>2000 h</td>
+    <td style="background-color:rgb(200,200,200)"><div class="tooltip">N/A<span class="tooltiptext"></span> </div></td>
+    <td style="background-color:rgb(0.000000, 255.000000, 0)"><div class="tooltip">2021-04-04<span class="tooltiptext">No assignment scheduled</span> </div></td>
+    <td>(0)</td>
+  </tr>
+  <tr>
+    <td><input type="checkbox" class="ch2"  onclick="a[81]=81;"><br></td>
+    <td>[81 OP] Geraeteblech MK FKL [Fluidplan Nr.:57.2E]</td>
+    <td>  <div class="tooltip">Filter Polyglas Strahlfuehrungsbelueftung tauschen<span class="tooltiptext">Details: NaN<br>Ersatzteil: 373321<br>Werkzeug: NaN</span> </div></td>
+    <td>Insp</td>
+    <td></td>
+    <td>2000 h</td>
+    <td style="background-color:rgb(200,200,200)"><div class="tooltip">N/A<span class="tooltiptext"></span> </div></td>
+    <td style="background-color:rgb(0.000000, 255.000000, 0)"><div class="tooltip">2021-04-04<span class="tooltiptext">No assignment scheduled</span> </div></td>
+    <td>(0)</td>
+  </tr>
+  <tr>
+    <td><input type="checkbox" class="ch2"  onclick="a[71]=71;"><br></td>
+    <td>[71 CO] Kuehlaggregat</td>
+    <td>  <div class="tooltip">Kuehlwasser (Filltersieb muss mit gereinigt werden) wechseln<span class="tooltiptext">Details: NaN<br>Ersatzteil: DI-Wasser -Kuehlwasserzusaetze (laenderspezifisch) Easy-Kit Cu-4 Stdrd -120-359L- <> USA/ CAN/ B/ NL (1653107)<br>Werkzeug: NaN</span> </div></td>
+    <td>Insp</td>
+    <td></td>
+    <td>365 T</td>
+    <td style="background-color:rgb(200,200,200)"><div class="tooltip">N/A<span class="tooltiptext"></span> </div></td>
+    <td style="background-color:rgb(0.000000, 255.000000, 0)"><div class="tooltip">2021-07-28<span class="tooltiptext">No assignment scheduled</span> </div></td>
+    <td>(240)</td>
+  </tr>
+  <tr>
+    <td><input type="checkbox" class="ch2"  onclick="a[82]=82;"><br></td>
+    <td>[82 SC] Elektrik</td>
+    <td>  <div class="tooltip">Sichtkontrolle und Staubablagerungen kontrollieren<span class="tooltiptext">Details: NaN<br>Ersatzteil: SP MAT6565511<br>Werkzeug: NaN</span> </div></td>
+    <td>Insp</td>
+    <td></td>
+    <td>368 T</td>
+    <td style="background-color:rgb(200,200,200)"><div class="tooltip">N/A<span class="tooltiptext"></span> </div></td>
+    <td style="background-color:rgb(0.000000, 255.000000, 0)"><div class="tooltip">2021-07-31<span class="tooltiptext">No assignment scheduled</span> </div></td>
+    <td>(15)</td>
+  </tr>
+  <tr>
+    <td><input type="checkbox" class="ch2"  onclick="a[74]=74;"><br></td>
+    <td>[74 MH] Hydraulikaggregat</td>
+    <td>  <div class="tooltip">Oel und Oelfilter ersetzen<span class="tooltiptext">Details: Hauptschalter aus. <br>Ersatzteil: 0419693 Hydraulikoel Avilub Fluid HVD 46 (210l Fass)1801553 Anschraubpatrone<br>Werkzeug: NaN</span> </div></td>
+    <td>Y/N</td>
+    <td></td>
+    <td>1500 T</td>
+    <td style="background-color:rgb(200,200,200)"><div class="tooltip">N/A<span class="tooltiptext"></span> </div></td>
+    <td style="background-color:rgb(0.000000, 255.000000, 0)"><div class="tooltip">2024-09-05<span class="tooltiptext">No assignment scheduled</span> </div></td>
+    <td>(60)</td>
+  </tr>
+  <tr>
+    <td><input type="checkbox" class="ch2"  onclick="a[83]=83;"><br></td>
+    <td>[83 SC] Elektrik</td>
+    <td>  <div class="tooltip">Funktion Luefter am Kuehlgeraet pruefen<span class="tooltiptext">Details: NaN<br>Ersatzteil: SP MAT6565512<br>Werkzeug: NaN</span> </div></td>
+    <td>Insp</td>
+    <td></td>
+    <td>1500 T</td>
+    <td style="background-color:rgb(200,200,200)"><div class="tooltip">N/A<span class="tooltiptext"></span> </div></td>
+    <td style="background-color:rgb(0.000000, 255.000000, 0)"><div class="tooltip">2024-09-05<span class="tooltiptext">No assignment scheduled</span> </div></td>
+    <td>(5)</td>
+  </tr>
+  <tr>
+    <td><input type="checkbox" class="ch2"  onclick="a[84]=84;"><br></td>
+    <td>[84 SC] NCU</td>
+    <td>  <div class="tooltip">Luefter-/Batterie-Modul fuer Solutionline ersetzen<span class="tooltiptext">Details: - siehe Siemens BA- haengt mit ID 132 zusammen- weitere Luefter in ID 137<br>Ersatzteil: 6FC5372-0AA30-0AB0 / 1(0385837) <br>Werkzeug: NaN</span> </div></td>
+    <td>Insp</td>
+    <td></td>
+    <td>1500 T</td>
+    <td style="background-color:rgb(200,200,200)"><div class="tooltip">N/A<span class="tooltiptext"></span> </div></td>
+    <td style="background-color:rgb(0.000000, 255.000000, 0)"><div class="tooltip">2024-09-05<span class="tooltiptext">No assignment scheduled</span> </div></td>
+    <td>(5)</td>
+  </tr>
+  <tr>
+    <td><input type="checkbox" class="ch2"  onclick="a[85]=85;"><br></td>
+    <td>[85 SC] IPC</td>
+    <td>  <div class="tooltip">Akku-Pack USV ersetzen<span class="tooltiptext">Details: NaN<br>Ersatzteil: 1932223 Akkupack 24V 1/3Ah<br>Werkzeug: NaN</span> </div></td>
+    <td>Insp</td>
+    <td></td>
+    <td>1500 T</td>
+    <td style="background-color:rgb(200,200,200)"><div class="tooltip">N/A<span class="tooltiptext"></span> </div></td>
+    <td style="background-color:rgb(0.000000, 255.000000, 0)"><div class="tooltip">2024-09-05<span class="tooltiptext">No assignment scheduled</span> </div></td>
+    <td>(15)</td>
+  </tr>
+  <tr>
+    <td><input type="checkbox" class="ch2"  onclick="a[86]=86;"><br></td>
+    <td>[86 SC] IPC</td>
+    <td>  <div class="tooltip">Luefterkassette ersetzen<span class="tooltiptext">Details: NaN<br>Ersatzteil: 2033344 Luefterkassette IPC C6930<br>Werkzeug: NaN</span> </div></td>
+    <td>Insp</td>
+    <td></td>
+    <td>1500 T</td>
+    <td style="background-color:rgb(200,200,200)"><div class="tooltip">N/A<span class="tooltiptext"></span> </div></td>
+    <td style="background-color:rgb(0.000000, 255.000000, 0)"><div class="tooltip">2024-09-05<span class="tooltiptext">No assignment scheduled</span> </div></td>
+    <td>(20)</td>
+  </tr>
+  <tr>
+    <td><input type="checkbox" class="ch2"  onclick="a[87]=87;"><br></td>
+    <td>[87 SC] IPC</td>
+    <td>  <div class="tooltip">BIOS-Batterie ersetzen<span class="tooltiptext">Details: NaN<br>Ersatzteil: 0143727 Knopfzellen-Batterie CR2032<br>Werkzeug: NaN</span> </div></td>
+    <td>Insp</td>
+    <td></td>
+    <td>1500 T</td>
+    <td style="background-color:rgb(200,200,200)"><div class="tooltip">N/A<span class="tooltiptext"></span> </div></td>
+    <td style="background-color:rgb(0.000000, 255.000000, 0)"><div class="tooltip">2024-09-05<span class="tooltiptext">No assignment scheduled</span> </div></td>
+    <td>(20)</td>
+  </tr>
+  <tr>
+    <td><input type="checkbox" class="ch2"  onclick="a[88]=88;"><br></td>
+    <td>[88 SC] NCU</td>
+    <td>  <div class="tooltip">Die Batterie im Luefter-/Batterie-Modul fuer Solutionline Wartungspunkt entfaellt ggf. wenn ID68 durchgefuehrt wird ersetzen<span class="tooltiptext">Details: haengt mit ID 68 zusammen<br>Ersatzteil: Batterie Lithium 3V fuer MMC-MODUL (0143467) 1x <br>Werkzeug: NaN</span> </div></td>
+    <td>Insp</td>
+    <td></td>
+    <td>1500 T</td>
+    <td style="background-color:rgb(200,200,200)"><div class="tooltip">N/A<span class="tooltiptext"></span> </div></td>
+    <td style="background-color:rgb(0.000000, 255.000000, 0)"><div class="tooltip">2024-09-05<span class="tooltiptext">No assignment scheduled</span> </div></td>
+    <td>5</td>
+  </tr>
+  <tr>
+    <td><input type="checkbox" class="ch2"  onclick="a[89]=89;"><br></td>
+    <td>[89 SC] IPC</td>
+    <td>  <div class="tooltip">Akku-Pack USV ersetzen<span class="tooltiptext">Details: NaN<br>Ersatzteil: 1932223 Akkupack 24V 1/3Ah<br>Werkzeug: NaN</span> </div></td>
+    <td>Insp</td>
+    <td></td>
+    <td>1500 T</td>
+    <td style="background-color:rgb(200,200,200)"><div class="tooltip">N/A<span class="tooltiptext"></span> </div></td>
+    <td style="background-color:rgb(0.000000, 255.000000, 0)"><div class="tooltip">2024-09-05<span class="tooltiptext">No assignment scheduled</span> </div></td>
+    <td>(15)</td>
+  </tr>
+  <tr>
+    <td><input type="checkbox" class="ch2"  onclick="a[90]=90;"><br></td>
+    <td>[90 SC] IPC</td>
+    <td>  <div class="tooltip">Luefterkassette ersetzen<span class="tooltiptext">Details: NaN<br>Ersatzteil: 2033344 Luefterkassette IPC C6930<br>Werkzeug: NaN</span> </div></td>
+    <td>Insp</td>
+    <td></td>
+    <td>1500 T</td>
+    <td style="background-color:rgb(200,200,200)"><div class="tooltip">N/A<span class="tooltiptext"></span> </div></td>
+    <td style="background-color:rgb(0.000000, 255.000000, 0)"><div class="tooltip">2024-09-05<span class="tooltiptext">No assignment scheduled</span> </div></td>
+    <td>(20)</td>
+  </tr>
+  <tr>
+    <td><input type="checkbox" class="ch2"  onclick="a[91]=91;"><br></td>
+    <td>[91 SC] IPC</td>
+    <td>  <div class="tooltip">BIOS-Batterie ersetzen<span class="tooltiptext">Details: NaN<br>Ersatzteil: 0143727 Knopfzellen-Batterie CR2032<br>Werkzeug: NaN</span> </div></td>
+    <td>Insp</td>
+    <td></td>
+    <td>1500 T</td>
+    <td style="background-color:rgb(200,200,200)"><div class="tooltip">N/A<span class="tooltiptext"></span> </div></td>
+    <td style="background-color:rgb(0.000000, 255.000000, 0)"><div class="tooltip">2024-09-05<span class="tooltiptext">No assignment scheduled</span> </div></td>
+    <td>(20)</td>
+  </tr>
+</table>
+</div>
+
+<!--****************************************--> 
+<div id="TRUMPF" class="tabcontent">
+
+<table>
+    <tr><td>Ansprechpartner Kunde</td><td>Hr. Mueller, Tel: 01523-254152432</td>  </tr>  
+    <tr><td>Ansprechpartner TRUMPF</td><td>Servicehotline, Tel: 0800-254152432</td>  </tr>  
+    <tr><td>-</td><td></td>  </tr>
+    <tr><td>Option</td><td>Rotolas</td>  </tr>
+    <tr><td>Option</td><td>Brightline</td>  </tr>
+ </table>
+
+  <h3>Status of the last TRUMPF Wartung</h3>
+  <p>Letzte durchgefuehrte Wartung von Trumpfmitabeiter Mueller am 01.02.2020</p>
+  <p>naechste Faellige Wartung am 01.08.2020</p>
+  <h3>Notizen der letzten TRUMPF Wartung</h3>
+  <p>Die Auflageleisten scheinen zu selten gewechselt zu werden</p>
+  <p>Wasserfilter ist an verschleissgrenze und sollte getauscht weren</p>
+  
+  <table id="tables">
+      <tr>
+          <th></th>
+          <th>Vor - und Nachbereitende Taetigkeiten</th>
+          <th>Detail</th>
+          <th>Soll</th>
+          <th>Ist</th>
+          <th>Zustand</th>
+          </tr>
+  <tr>
+      <td>Vor</td>
+      <td>Kontrolle der letzten Wartungscheckliste</td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td style="background-color:rgb(0,255,0)"><div class="tooltip">OK<span class="tooltiptext">Assign#: 509209<br>LastAssign:<br>Comments:</span> </div></td>
+    </tr>
+    <tr>
+      <td>Nach</td>
+      <td>Testteil nach der Wartung schneiden</td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td style="background-color:rgb(0,255,0)"><div class="tooltip">OK<span class="tooltiptext">Assign#: 509209<br>LastAssign:<br>Comments:</span> </div></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td>Wartungsmerker in HMI zuruecksetzen</td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td style="background-color:rgb(0,255,0)"><div class="tooltip">OK<span class="tooltiptext">Assign#: 509209<br>LastAssign:<br>Comments:</span> </div></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td>Wartungsergebnis mit Kunden durchgehen</td>
+      <td>Wartungsmanager Huber am 25.6.2020</td>
+      <td></td>
+      <td></td>
+      <td style="background-color:rgb(0,255,0)"><div class="tooltip">OK<span class="tooltiptext">Assign#: 509209<br>LastAssign:<br>Comments:</span> </div></td>
+    </tr>
+  </table>
+
+
+  <h3>Details der letzten TRUMPF Wartung</h3>
+ 
+<table id="tables">
+  <tr>
+    <th></th>
+    <th>Wartungsstelle</th>
+    <th>Wartungsaufgabe</th>
+    <th>Soll</th>
+    <th>Ist</th>
+    <th>__Cycle__</th>
+    <th>Zustand</th>
+    <th>___Faellig___</th>
+    <th>  <div class="tooltip">Dauer(NZ)<span class="tooltiptext">Dauer in min<br>[] = HZP</span> </div></th>
+  </tr>
+  <tr>
+    <td></td>
+    <td>[97 DP] Geraeteblech MK FKL [Fluidplan Nr.:53.5E]</td>
+    <td>  <div class="tooltip">Filter 2 CK50 Druckluftversorgung tauschen<span class="tooltiptext">Details: Hahn absperren.Versorgung entlueften.Filter tauschen <br>Ersatzteil: 369321<br>Werkzeug: NaN</span> </div></td>
+    <td>Y/N</td>
+    <td></td>
+    <td>2000 h</td>
+    <td style="background-color:rgb(255,0,0)"><div class="tooltip">critical<span class="tooltiptext">* Action needed: *<br>Assign#: <br>LastAssign:<br>Comments:</span> </div></td>
+    <td style="background-color:rgb(0.000000, 255.000000, 0)"><div class="tooltip">2021-04-04<span class="tooltiptext">No assignment scheduled</span> </div></td>
+    <td>(2)</td>
+  </tr>
+  <tr>
+    <td></td>
+    <td>[98 DP] Geraeteblech MK FKL [Fluidplan Nr.:53.6E]</td>
+    <td>  <div class="tooltip">Aktivkohlefilter 1 Druckluftversorgung==> wird ersetzen mit Filter aus ID 51 ersetzen mit ID ==> siehe Wartungsdetail<span class="tooltiptext">Details: NaN<br>Ersatzteil: 369323<br>Werkzeug: NaN</span> </div></td>
+    <td>Y/N</td>
+    <td></td>
+    <td>500 h</td>
+    <td style="background-color:rgb(200,200,200)"><div class="tooltip">N/A<span class="tooltiptext"></span> </div></td>
+    <td style="background-color:rgb(0.000000, 255.000000, 0)"><div class="tooltip">2020-09-29<span class="tooltiptext">No assignment scheduled</span> </div></td>
+    <td>(2)</td>
+  </tr>
+  <tr>
+    <td></td>
+    <td>[99 DP] Geraeteblech MK FKL [Fluidplan Nr.:53.7E]</td>
+    <td>  <div class="tooltip">Aktivkohlefilter 2 Druckluftversorgung==> gebrachter Filter bei ID 37 verwenden  ersetzen mit ID ==> siehe Wartungsdetail<span class="tooltiptext">Details: NaN<br>Ersatzteil: 369323<br>Werkzeug: NaN</span> </div></td>
+    <td>Y/N</td>
+    <td></td>
+    <td>500 h</td>
+    <td style="background-color:rgb(200,200,200)"><div class="tooltip">N/A<span class="tooltiptext"></span> </div></td>
+    <td style="background-color:rgb(0.000000, 255.000000, 0)"><div class="tooltip">2020-09-29<span class="tooltiptext">No assignment scheduled</span> </div></td>
+    <td>(2)</td>
+  </tr>
+  <tr>
+    <td></td>
+    <td>[135 MU] Fuehrungswagen</td>
+    <td>  <div class="tooltip">Vorsatzdichtung/ aussenliegend am Fuehrungs-/Messwagen der Y-Achse  kontrollieren<span class="tooltiptext">Details: NaN<br>Ersatzteil: 2247027<br>Werkzeug: NaN</span> </div></td>
+    <td>Insp</td>
+    <td></td>
+    <td>180 T</td>
+    <td style="background-color:rgb(200,200,200)"><div class="tooltip">N/A<span class="tooltiptext"></span> </div></td>
+    <td style="background-color:rgb(0.000000, 255.000000, 0)"><div class="tooltip">2021-01-24<span class="tooltiptext">No assignment scheduled</span> </div></td>
+    <td>(3)</td>
+  </tr>
+  <tr>
+    <td></td>
+    <td>[95 CU] Elektrik</td>
+    <td>  <div class="tooltip">Widerstand zwischen Palette und Gehaeuse Schneideinheit pruefen<span class="tooltiptext">Details: NaN<br>Ersatzteil: NaN<br>Werkzeug: Multimeter</span> </div></td>
+    <td>  <div class="tooltip">3<span class="tooltiptext">Widerstand <=  3 Ohm</span> </div></td>
+    <td></td>
+    <td>2000 h</td>
+    <td style="background-color:rgb(200,200,200)"><div class="tooltip">N/A<span class="tooltiptext"></span> </div></td>
+    <td style="background-color:rgb(0.000000, 255.000000, 0)"><div class="tooltip">2021-04-04<span class="tooltiptext">No assignment scheduled</span> </div></td>
+    <td>(5)</td>
+  </tr>
+  <tr>
+    <td></td>
+    <td>[96 DP] Geraeteblech MK FKL [Fluidplan Nr.:53.4E]</td>
+    <td>  <div class="tooltip">Filter 1 CK70 Druckluftversorgung tauschen<span class="tooltiptext">Details: Hahn absperren.Versorgung entlueften.Filter tauschen <br>Ersatzteil: 369322<br>Werkzeug: NaN</span> </div></td>
+    <td>Y/N</td>
+    <td></td>
+    <td>2000 h</td>
+    <td style="background-color:rgb(200,200,200)"><div class="tooltip">N/A<span class="tooltiptext"></span> </div></td>
+    <td style="background-color:rgb(0.000000, 255.000000, 0)"><div class="tooltip">2021-04-04<span class="tooltiptext">No assignment scheduled</span> </div></td>
+    <td>(2)</td>
+  </tr>
+  <tr>
+    <td></td>
+    <td>[100 DP] Geraeteblech MK FKL [Fluidplan Nr.:85.21]</td>
+    <td>  <div class="tooltip">Wasserfilter 150æm am Wasserbehaelter CoolLine kontrollieren/ ggf. tauschen<span class="tooltiptext">Details: NaN<br>Ersatzteil: 378317<br>Werkzeug: NaN</span> </div></td>
+    <td>Y/N</td>
+    <td></td>
+    <td>2000 h</td>
+    <td style="background-color:rgb(200,200,200)"><div class="tooltip">N/A<span class="tooltiptext"></span> </div></td>
+    <td style="background-color:rgb(0.000000, 255.000000, 0)"><div class="tooltip">2021-04-04<span class="tooltiptext">No assignment scheduled</span> </div></td>
+    <td>(5)</td>
+  </tr>
+  <tr>
+    <td></td>
+    <td>[101 EN] Schutzkabine</td>
+    <td>  <div class="tooltip">Lichtdichtheit pruefen<span class="tooltiptext">Details: NaN<br>Ersatzteil: NaN<br>Werkzeug: NaN</span> </div></td>
+    <td>Insp</td>
+    <td></td>
+    <td>2000 h</td>
+    <td style="background-color:rgb(200,200,200)"><div class="tooltip">N/A<span class="tooltiptext"></span> </div></td>
+    <td style="background-color:rgb(0.000000, 255.000000, 0)"><div class="tooltip">2021-04-04<span class="tooltiptext">No assignment scheduled</span> </div></td>
+    <td>(15)</td>
+  </tr>
+  <tr>
+    <td></td>
+    <td>[103 LA] Laser</td>
+    <td>  <div class="tooltip">Leistungskennlinie - mit TruControl Modul Startup aufnehmen<span class="tooltiptext">Details: nicht ueber TruControl<br>Ersatzteil: SP MAT6565470<br>Werkzeug: Laptop mit StartUp</span> </div></td>
+    <td>Y/N</td>
+    <td></td>
+    <td>2000 h</td>
+    <td style="background-color:rgb(200,200,200)"><div class="tooltip">N/A<span class="tooltiptext"></span> </div></td>
+    <td style="background-color:rgb(0.000000, 255.000000, 0)"><div class="tooltip">2021-04-04<span class="tooltiptext">No assignment scheduled</span> </div></td>
+    <td>(30)</td>
+  </tr>
+  <tr>
+    <td></td>
+    <td>[104 LA] Laserkuehlung</td>
+    <td>  <div class="tooltip">Leckagen in Kuehlung/ Optikraum und DPS kontrollieren<span class="tooltiptext">Details: NaN<br>Ersatzteil: SP MAT6565471<br>Werkzeug: NaN</span> </div></td>
+    <td>Insp</td>
+    <td></td>
+    <td>2000 h</td>
+    <td style="background-color:rgb(200,200,200)"><div class="tooltip">N/A<span class="tooltiptext"></span> </div></td>
+    <td style="background-color:rgb(0.000000, 255.000000, 0)"><div class="tooltip">2021-04-04<span class="tooltiptext">No assignment scheduled</span> </div></td>
+    <td>(5)</td>
+  </tr>
+  <tr>
+    <td></td>
+    <td>[124 MH] Paletteneinzug</td>
+    <td>  <div class="tooltip">Kettenspannung (am Spanner) pruefen/ ggf. nachspannen<span class="tooltiptext">Details: Abstand in der Kettenspannvorrichtung/ im Maschineninnenraum/ linkes Seitenteil zwischen Gleitstein und Zeiger des Federspanners<br>Ersatzteil: SP MAT6565485<br>Werkzeug: NaN</span> </div></td>
+    <td>Insp</td>
+    <td></td>
+    <td>2000 h</td>
+    <td style="background-color:rgb(200,200,200)"><div class="tooltip">N/A<span class="tooltiptext"></span> </div></td>
+    <td style="background-color:rgb(0.000000, 255.000000, 0)"><div class="tooltip">2021-04-04<span class="tooltiptext">No assignment scheduled</span> </div></td>
+    <td>(10)</td>
+  </tr>
+  <tr>
+    <td></td>
+    <td>[130 MU] Zahnstangen X-Achse</td>
+    <td>  <div class="tooltip">Umkehrspiel in X pruefen<span class="tooltiptext">Details: NaN<br>Ersatzteil: SP MAT6565501<br>Werkzeug: MessuhrFestanschlag (1525015) 4x</span> </div></td>
+    <td>  <div class="tooltip">12<span class="tooltiptext">Umkehrspiel zwischen 10 u 15 Nm</span> </div></td>
+    <td></td>
+    <td>2000 h</td>
+    <td style="background-color:rgb(200,200,200)"><div class="tooltip">N/A<span class="tooltiptext"></span> </div></td>
+    <td style="background-color:rgb(0.000000, 255.000000, 0)"><div class="tooltip">2021-04-04<span class="tooltiptext">No assignment scheduled</span> </div></td>
+    <td>(15)</td>
+  </tr>
+  <tr>
+    <td></td>
+    <td>[131 MU] Referenzschalter X/ Y/ Z</td>
+    <td>  <div class="tooltip">Funktion / Abstand pruefen<span class="tooltiptext">Details: NaN<br>Ersatzteil: SP MAT6565502<br>Werkzeug: NaN</span> </div></td>
+    <td>Insp</td>
+    <td></td>
+    <td>2000 h</td>
+    <td style="background-color:rgb(200,200,200)"><div class="tooltip">N/A<span class="tooltiptext"></span> </div></td>
+    <td style="background-color:rgb(0.000000, 255.000000, 0)"><div class="tooltip">2021-04-04<span class="tooltiptext">No assignment scheduled</span> </div></td>
+    <td>(15)</td>
+  </tr>
+  <tr>
+    <td></td>
+    <td>[133 MU] Kollisionsschutz KL59</td>
+    <td>  <div class="tooltip">Auf Sauberkeit und Funktionsfaehigkeit  kontrollieren<span class="tooltiptext">Details: NaN<br>Ersatzteil: SP MAT6565506<br>Werkzeug: NaN</span> </div></td>
+    <td>Insp</td>
+    <td></td>
+    <td>2000 h</td>
+    <td style="background-color:rgb(200,200,200)"><div class="tooltip">N/A<span class="tooltiptext"></span> </div></td>
+    <td style="background-color:rgb(0.000000, 255.000000, 0)"><div class="tooltip">2021-04-04<span class="tooltiptext">No assignment scheduled</span> </div></td>
+    <td>(10)</td>
+  </tr>
+  <tr>
+    <td></td>
+    <td>[134 MU] Positionslaserdiode</td>
+    <td>  <div class="tooltip">Offset Positionslaser-Diode pruefen/ ggf. einstellen<span class="tooltiptext">Details: NaN<br>Ersatzteil: SP MAT6565507<br>Werkzeug: NaN</span> </div></td>
+    <td>Insp</td>
+    <td></td>
+    <td>2000 h</td>
+    <td style="background-color:rgb(200,200,200)"><div class="tooltip">N/A<span class="tooltiptext"></span> </div></td>
+    <td style="background-color:rgb(0.000000, 255.000000, 0)"><div class="tooltip">2021-04-04<span class="tooltiptext">No assignment scheduled</span> </div></td>
+    <td>(10)</td>
+  </tr>
+  <tr>
+    <td></td>
+    <td>[92 BG] Laserlichtkabel (LLK)</td>
+    <td>  <div class="tooltip">LLK auf Beschaedigung und Kuehlschlaeuche auf Dichtheit pruefen<span class="tooltiptext">Details: NaN<br>Ersatzteil: NaN<br>Werkzeug: Trittleiter</span> </div></td>
+    <td>Insp</td>
+    <td></td>
+    <td>365 T</td>
+    <td style="background-color:rgb(200,200,200)"><div class="tooltip">N/A<span class="tooltiptext"></span> </div></td>
+    <td style="background-color:rgb(0.000000, 255.000000, 0)"><div class="tooltip">2021-07-28<span class="tooltiptext">No assignment scheduled</span> </div></td>
+    <td>(10)</td>
+  </tr>
+  <tr>
+    <td></td>
+    <td>[93 CO] Lueftungsventilatoren im Kuehlaggregat</td>
+    <td>  <div class="tooltip">Funktion kontrollieren<span class="tooltiptext">Details: NaN<br>Ersatzteil: NaN<br>Werkzeug: NaN</span> </div></td>
+    <td>Insp</td>
+    <td></td>
+    <td>365 T</td>
+    <td style="background-color:rgb(200,200,200)"><div class="tooltip">N/A<span class="tooltiptext"></span> </div></td>
+    <td style="background-color:rgb(0.000000, 255.000000, 0)"><div class="tooltip">2021-07-28<span class="tooltiptext">No assignment scheduled</span> </div></td>
+    <td>5</td>
+  </tr>
+  <tr>
+    <td></td>
+    <td>[102 ES] Kompaktentstauber</td>
+    <td>  <div class="tooltip">CO2-Flasche Ventil geoeffnet pruefen<span class="tooltiptext">Details: NaN<br>Ersatzteil: SP MAT6565469<br>Werkzeug: NaN</span> </div></td>
+    <td>Insp</td>
+    <td></td>
+    <td>365 T</td>
+    <td style="background-color:rgb(200,200,200)"><div class="tooltip">N/A<span class="tooltiptext"></span> </div></td>
+    <td style="background-color:rgb(0.000000, 255.000000, 0)"><div class="tooltip">2021-07-28<span class="tooltiptext">No assignment scheduled</span> </div></td>
+    <td>12</td>
+  </tr>
+  <tr>
+    <td></td>
+    <td>[105 LA] Bedienpult</td>
+    <td>  <div class="tooltip">Selbsttest pruefen<span class="tooltiptext">Details: NaN<br>Ersatzteil: SP MAT6565472<br>Werkzeug: NaN</span> </div></td>
+    <td>Insp</td>
+    <td></td>
+    <td>365 T</td>
+    <td style="background-color:rgb(200,200,200)"><div class="tooltip">N/A<span class="tooltiptext"></span> </div></td>
+    <td style="background-color:rgb(0.000000, 255.000000, 0)"><div class="tooltip">2021-07-28<span class="tooltiptext">No assignment scheduled</span> </div></td>
+    <td>(10)</td>
+  </tr>
+  <tr>
+    <td></td>
+    <td>[106 LA] Laser</td>
+    <td>  <div class="tooltip">Laserquelle auf Beschaedigung pruefen<span class="tooltiptext">Details: NaN<br>Ersatzteil: SP MAT6565473<br>Werkzeug: NaN</span> </div></td>
+    <td>Insp</td>
+    <td></td>
+    <td>365 T</td>
+    <td style="background-color:rgb(200,200,200)"><div class="tooltip">N/A<span class="tooltiptext"></span> </div></td>
+    <td style="background-color:rgb(0.000000, 255.000000, 0)"><div class="tooltip">2021-07-28<span class="tooltiptext">No assignment scheduled</span> </div></td>
+    <td>3</td>
+  </tr>
+  <tr>
+    <td></td>
+    <td>[107 LA] Laser</td>
+    <td>  <div class="tooltip">Reinigungsbiozid (rot) in Tank und 1h Reinigungslauf durchfuehren<span class="tooltiptext">Details: NaN<br>Ersatzteil: Easy Kit CU3 STdrd (50-119L) <> USA CAN/ B/ NL (1653112) <br>Werkzeug: in TruControl ==> Wartung/ Reinigung Laserkreislauf/ Ueberwachung Leitfaehigkeit deaktivieren</span> </div></td>
+    <td>Insp</td>
+    <td></td>
+    <td>365 T</td>
+    <td style="background-color:rgb(200,200,200)"><div class="tooltip">N/A<span class="tooltiptext"></span> </div></td>
+    <td style="background-color:rgb(0.000000, 255.000000, 0)"><div class="tooltip">2021-07-28<span class="tooltiptext">No assignment scheduled</span> </div></td>
+    <td>60</td>
+  </tr>
+  <tr>
+    <td></td>
+    <td>[108 LA] Laser</td>
+    <td>  <div class="tooltip">Funktion Schluesselschalter pruefen<span class="tooltiptext">Details: (Pruefung durch hoeren und fuehlen)<br>Ersatzteil: SP MAT6565473<br>Werkzeug: NaN</span> </div></td>
+    <td>Insp</td>
+    <td></td>
+    <td>365 T</td>
+    <td style="background-color:rgb(200,200,200)"><div class="tooltip">N/A<span class="tooltiptext"></span> </div></td>
+    <td style="background-color:rgb(0.000000, 255.000000, 0)"><div class="tooltip">2021-07-28<span class="tooltiptext">No assignment scheduled</span> </div></td>
+    <td>(1)</td>
+  </tr>
+  <tr>
+    <td></td>
+    <td>[109 LA] Laser</td>
+    <td>  <div class="tooltip">Funktion Haubenschalter pruefen<span class="tooltiptext">Details: Fehlermeldung auf TruControl erscheint<br>Ersatzteil: SP MAT6565474<br>Werkzeug: NaN</span> </div></td>
+    <td>Insp</td>
+    <td></td>
+    <td>365 T</td>
+    <td style="background-color:rgb(200,200,200)"><div class="tooltip">N/A<span class="tooltiptext"></span> </div></td>
+    <td style="background-color:rgb(0.000000, 255.000000, 0)"><div class="tooltip">2021-07-28<span class="tooltiptext">No assignment scheduled</span> </div></td>
+    <td>(1)</td>
+  </tr>
+  <tr>
+    <td></td>
+    <td>[110 LA] Bedienpult</td>
+    <td>  <div class="tooltip">Funktion Telepraesenz  pruefen<span class="tooltiptext">Details: NaN<br>Ersatzteil: SP MAT6565475<br>Werkzeug: NaN</span> </div></td>
+    <td>Insp</td>
+    <td></td>
+    <td>365 T</td>
+    <td style="background-color:rgb(200,200,200)"><div class="tooltip">N/A<span class="tooltiptext"></span> </div></td>
+    <td style="background-color:rgb(0.000000, 255.000000, 0)"><div class="tooltip">2021-07-28<span class="tooltiptext">No assignment scheduled</span> </div></td>
+    <td>5</td>
+  </tr>
+  <tr>
+    <td></td>
+    <td>[111 LA] Laser</td>
+    <td>  <div class="tooltip">Luefter von Steuerung und Schrank pruefen<span class="tooltiptext">Details: NaN<br>Ersatzteil: SP MAT6565476<br>Werkzeug: NaN</span> </div></td>
+    <td>Insp</td>
+    <td></td>
+    <td>365 T</td>
+    <td style="background-color:rgb(200,200,200)"><div class="tooltip">N/A<span class="tooltiptext"></span> </div></td>
+    <td style="background-color:rgb(0.000000, 255.000000, 0)"><div class="tooltip">2021-07-28<span class="tooltiptext">No assignment scheduled</span> </div></td>
+    <td>3</td>
+  </tr>
+  <tr>
+    <td></td>
+    <td>[112 LA] Laser</td>
+    <td>  <div class="tooltip">Feuchtesensor  pruefen<span class="tooltiptext">Details: NaN<br>Ersatzteil: SP MAT6565477<br>Werkzeug: NaN</span> </div></td>
+    <td>Insp</td>
+    <td></td>
+    <td>365 T</td>
+    <td style="background-color:rgb(200,200,200)"><div class="tooltip">N/A<span class="tooltiptext"></span> </div></td>
+    <td style="background-color:rgb(0.000000, 255.000000, 0)"><div class="tooltip">2021-07-28<span class="tooltiptext">No assignment scheduled</span> </div></td>
+    <td>3</td>
+  </tr>
+  <tr>
+    <td></td>
+    <td>[113 LA] Laser</td>
+    <td>  <div class="tooltip">Kamerabild  pruefen<span class="tooltiptext">Details: NaN<br>Ersatzteil: SP MAT6565478<br>Werkzeug: Start Up auf Laptop (Kamerabild der Scheibe)</span> </div></td>
+    <td>Insp</td>
+    <td></td>
+    <td>365 T</td>
+    <td style="background-color:rgb(200,200,200)"><div class="tooltip">N/A<span class="tooltiptext"></span> </div></td>
+    <td style="background-color:rgb(0.000000, 255.000000, 0)"><div class="tooltip">2021-07-28<span class="tooltiptext">No assignment scheduled</span> </div></td>
+    <td>15</td>
+  </tr>
+  <tr>
+    <td></td>
+    <td>[114 LA] Bedienpult</td>
+    <td>  <div class="tooltip">Condition Monitoring (CM) speichern<span class="tooltiptext">Details: Daten abholen und in Ordner ablegen<br>Ersatzteil: SP MAT6565479<br>Werkzeug: NaN</span> </div></td>
+    <td>Y/N</td>
+    <td></td>
+    <td>365 T</td>
+    <td style="background-color:rgb(200,200,200)"><div class="tooltip">N/A<span class="tooltiptext"></span> </div></td>
+    <td style="background-color:rgb(0.000000, 255.000000, 0)"><div class="tooltip">2021-07-28<span class="tooltiptext">No assignment scheduled</span> </div></td>
+    <td>15</td>
+  </tr>
+  <tr>
+    <td></td>
+    <td>[115 LA] Bedienpult</td>
+    <td>  <div class="tooltip">Software backup auf Maschine und fuer SIS speichern<span class="tooltiptext">Details: NaN<br>Ersatzteil: SP MAT6565480<br>Werkzeug: NaN</span> </div></td>
+    <td>Y/N</td>
+    <td></td>
+    <td>365 T</td>
+    <td style="background-color:rgb(200,200,200)"><div class="tooltip">N/A<span class="tooltiptext"></span> </div></td>
+    <td style="background-color:rgb(0.000000, 255.000000, 0)"><div class="tooltip">2021-07-28<span class="tooltiptext">No assignment scheduled</span> </div></td>
+    <td>10</td>
+  </tr>
+  <tr>
+    <td></td>
+    <td>[116 LA] Laser</td>
+    <td>  <div class="tooltip">Nur bei ausdruecklichem Kundenwunsch!DI Wasser Reinigungseinheit anschliessen und Reinigungslauf durchfuehren bis < 10æS DOK 10-12-48-A1-AK01 durchfuehren<span class="tooltiptext">Details: NaN<br>Ersatzteil: DI Wasser ReinigungseinheitFiltersatz fuer Reinigungseinheit (1943276)<br>Werkzeug: NaN</span> </div></td>
+    <td>Y/N</td>
+    <td></td>
+    <td>365 T</td>
+    <td style="background-color:rgb(200,200,200)"><div class="tooltip">N/A<span class="tooltiptext"></span> </div></td>
+    <td style="background-color:rgb(0.000000, 255.000000, 0)"><div class="tooltip">2021-07-28<span class="tooltiptext">No assignment scheduled</span> </div></td>
+    <td>(30)</td>
+  </tr>
+  <tr>
+    <td></td>
+    <td>[117 LA] Laser</td>
+    <td>  <div class="tooltip">Wartungsplakette am Laser wechseln<span class="tooltiptext">Details: NaN<br>Ersatzteil: Wartungsaufkleber DE (377086)<br>Werkzeug: NaN</span> </div></td>
+    <td>Y/N</td>
+    <td></td>
+    <td>365 T</td>
+    <td style="background-color:rgb(200,200,200)"><div class="tooltip">N/A<span class="tooltiptext"></span> </div></td>
+    <td style="background-color:rgb(0.000000, 255.000000, 0)"><div class="tooltip">2021-07-28<span class="tooltiptext">No assignment scheduled</span> </div></td>
+    <td>2</td>
+  </tr>
+  <tr>
+    <td></td>
+    <td>[118 LA] Laser</td>
+    <td>  <div class="tooltip">Wasser ablassen und neues DI-Wasser einfuellen. Spuelungslauf durchfuehren. Wiederholen bis Leitfaehigkeit im Kuehlsystem < 20æS durchfuehren<span class="tooltiptext">Details: Wasser ablassen und neues DI-Wasser (< 10æS) einfuellen. Spuelungslauf durchfuehren. Wiederholen bis Leitfaehigkeit im Kuehlsystem < 20æS<br>Ersatzteil: DI-Wasser (Menge abh. von der Anzahl an  Spuelvorgaenge Tankinhalt u. Leitungen)  <br>Werkzeug: NaN</span> </div></td>
+    <td>  <div class="tooltip">10<span class="tooltiptext">Leitfaehigkeit im Kuehlsystem < 20æS</span> </div></td>
+    <td></td>
+    <td>365 T</td>
+    <td style="background-color:rgb(200,200,200)"><div class="tooltip">N/A<span class="tooltiptext"></span> </div></td>
+    <td style="background-color:rgb(0.000000, 255.000000, 0)"><div class="tooltip">2021-07-28<span class="tooltiptext">No assignment scheduled</span> </div></td>
+    <td>(30)</td>
+  </tr>
+  <tr>
+    <td></td>
+    <td>[119 LA] Laser</td>
+    <td>  <div class="tooltip">Filtermelement DI Kreis und Filtertasse wechseln<span class="tooltiptext">Details: Filtermelement DI Kreis austauschen und Filtertasse reinigen<br>Ersatzteil: Filerkerze 20- Feinheit 50æm (1888631)<br>Werkzeug: NaN</span> </div></td>
+    <td>Y/N</td>
+    <td></td>
+    <td>365 T</td>
+    <td style="background-color:rgb(200,200,200)"><div class="tooltip">N/A<span class="tooltiptext"></span> </div></td>
+    <td style="background-color:rgb(0.000000, 255.000000, 0)"><div class="tooltip">2021-07-28<span class="tooltiptext">No assignment scheduled</span> </div></td>
+    <td>(15)</td>
+  </tr>
+  <tr>
+    <td></td>
+    <td>[120 LA] Laser</td>
+    <td>  <div class="tooltip">Brauchwasser Feinfilter wechseln<span class="tooltiptext">Details: NaN<br>Ersatzteil: Verschleissteil-Satz FD17 fuer SMF-133-1-  (1445470) Verschleissteil-Satz FD25 fuer SMF-133-1 1/4-  (1578264) <br>Werkzeug: NaN</span> </div></td>
+    <td>Y/N</td>
+    <td></td>
+    <td>365 T</td>
+    <td style="background-color:rgb(200,200,200)"><div class="tooltip">N/A<span class="tooltiptext"></span> </div></td>
+    <td style="background-color:rgb(0.000000, 255.000000, 0)"><div class="tooltip">2021-07-28<span class="tooltiptext">No assignment scheduled</span> </div></td>
+    <td>(10)</td>
+  </tr>
+  <tr>
+    <td></td>
+    <td>[121 LA] Laser</td>
+    <td>  <div class="tooltip">Korossionsschutzmittel (gelb)  nachfuellen<span class="tooltiptext">Details: NaN<br>Ersatzteil: Easy Kit CU3 STdrd (50-119L) <> USA CAN/ B/ NL (1653112) <br>Werkzeug: NaN</span> </div></td>
+    <td>Y/N</td>
+    <td></td>
+    <td>365 T</td>
+    <td style="background-color:rgb(200,200,200)"><div class="tooltip">N/A<span class="tooltiptext"></span> </div></td>
+    <td style="background-color:rgb(0.000000, 255.000000, 0)"><div class="tooltip">2021-07-28<span class="tooltiptext">No assignment scheduled</span> </div></td>
+    <td>(5)</td>
+  </tr>
+  <tr>
+    <td></td>
+    <td>[122 LA] Schneidkopf</td>
+    <td>  <div class="tooltip">Laserleistung nach Bearbeitungsoptik kontrollieren<span class="tooltiptext">Details: NaN<br>Ersatzteil: SP MAT6565480<br>Werkzeug: Primes Messkoffer1434082</span> </div></td>
+    <td>Insp</td>
+    <td></td>
+    <td>365 T</td>
+    <td style="background-color:rgb(200,200,200)"><div class="tooltip">N/A<span class="tooltiptext"></span> </div></td>
+    <td style="background-color:rgb(0.000000, 255.000000, 0)"><div class="tooltip">2021-07-28<span class="tooltiptext">No assignment scheduled</span> </div></td>
+    <td>(30)</td>
+  </tr>
+  <tr>
+    <td></td>
+    <td>[123 LA] Laser</td>
+    <td>  <div class="tooltip">Dichtheit TruDisk (6c) Recirculation Drying System (RDS) pruefen<span class="tooltiptext">Details: Hinweis aufnehmen: Der richtige Laserabgang ist zu waehlen<br>Ersatzteil: SP MAT6565481<br>Werkzeug: in TruControl ==> Wartung/ Service/ Dichtheitspruefung</span> </div></td>
+    <td>Insp</td>
+    <td></td>
+    <td>365 T</td>
+    <td style="background-color:rgb(200,200,200)"><div class="tooltip">N/A<span class="tooltiptext"></span> </div></td>
+    <td style="background-color:rgb(0.000000, 255.000000, 0)"><div class="tooltip">2021-07-28<span class="tooltiptext">No assignment scheduled</span> </div></td>
+    <td>(15)</td>
+  </tr>
+  <tr>
+    <td></td>
+    <td>[137 SC] Elektrik</td>
+    <td>  <div class="tooltip">24V Netzteil pruefen<span class="tooltiptext">Details: NaN<br>Ersatzteil: SP MAT6565509<br>Werkzeug: Multimeter</span> </div></td>
+    <td>  <div class="tooltip">26<span class="tooltiptext">Spannung = 26 ñ 0/1V</span> </div></td>
+    <td></td>
+    <td>366 T</td>
+    <td style="background-color:rgb(200,200,200)"><div class="tooltip">N/A<span class="tooltiptext"></span> </div></td>
+    <td style="background-color:rgb(0.000000, 255.000000, 0)"><div class="tooltip">2021-07-29<span class="tooltiptext">No assignment scheduled</span> </div></td>
+    <td>4</td>
+  </tr>
+  <tr>
+    <td></td>
+    <td>[138 SC] Tuerueberwachung</td>
+    <td>  <div class="tooltip">Funktionstest ueber Luefteranlauf und Luefterabschaltung beim Oeffnen und Schliessen der Schaltschranktuere pruefen<span class="tooltiptext">Details: Siehe IB2 Abnahmeprotokoll von M.Lendle.Doku ist im SIS mobile hinterlegt.Pruefen ob die Stellen im Dokument fuer den Service so verstaendlich sind.<br>Ersatzteil: SP MAT6565510<br>Werkzeug: NaN</span> </div></td>
+    <td>Insp</td>
+    <td></td>
+    <td>367 T</td>
+    <td style="background-color:rgb(200,200,200)"><div class="tooltip">N/A<span class="tooltiptext"></span> </div></td>
+    <td style="background-color:rgb(0.000000, 255.000000, 0)"><div class="tooltip">2021-07-30<span class="tooltiptext">No assignment scheduled</span> </div></td>
+    <td>4</td>
+  </tr>
+  <tr>
+    <td></td>
+    <td>[94 CS] Querfoerderband</td>
+    <td>  <div class="tooltip">Buerstenschmierung/ Buersten/ nachstroemen von frischem Fett kontrollieren/ ggf. tauschen<span class="tooltiptext">Details: Ggf. Pinsel nachstellen oder wechseln<br>Ersatzteil: Oelaufstreichbuerste 0/3mm gewellt(0353347)2x<br>Werkzeug: NaN</span> </div></td>
+    <td>Y/N</td>
+    <td></td>
+    <td>5000 h</td>
+    <td style="background-color:rgb(200,200,200)"><div class="tooltip">N/A<span class="tooltiptext"></span> </div></td>
+    <td style="background-color:rgb(0.000000, 255.000000, 0)"><div class="tooltip">2022-04-14<span class="tooltiptext">No assignment scheduled</span> </div></td>
+    <td>(20)</td>
+  </tr>
+  <tr>
+    <td></td>
+    <td>[126 MH] Paletteneinzug</td>
+    <td>  <div class="tooltip">Triebstockrad auf Beschaedigung pruefen<span class="tooltiptext">Details: NaN<br>Ersatzteil: SP MAT6565490<br>Werkzeug: NaN</span> </div></td>
+    <td>Insp</td>
+    <td></td>
+    <td>5000 h</td>
+    <td style="background-color:rgb(200,200,200)"><div class="tooltip">N/A<span class="tooltiptext"></span> </div></td>
+    <td style="background-color:rgb(0.000000, 255.000000, 0)"><div class="tooltip">2022-04-14<span class="tooltiptext">No assignment scheduled</span> </div></td>
+    <td>(15)</td>
+  </tr>
+  <tr>
+    <td></td>
+    <td>[127 MH] Palette</td>
+    <td>  <div class="tooltip">Triebstockstange auf Beschaedigung pruefen<span class="tooltiptext">Details: NaN<br>Ersatzteil: SP MAT6565491<br>Werkzeug: NaN</span> </div></td>
+    <td>Insp</td>
+    <td></td>
+    <td>5000 h</td>
+    <td style="background-color:rgb(200,200,200)"><div class="tooltip">N/A<span class="tooltiptext"></span> </div></td>
+    <td style="background-color:rgb(0.000000, 255.000000, 0)"><div class="tooltip">2022-04-14<span class="tooltiptext">No assignment scheduled</span> </div></td>
+    <td>(15)</td>
+  </tr>
+  <tr>
+    <td></td>
+    <td>[128 MH] Fuehrungsgestell</td>
+    <td>  <div class="tooltip">Palettentuere kontrollieren<span class="tooltiptext">Details: Uebergang zwischen Fuehrungsschienen<br>Ersatzteil: SP MAT6565492<br>Werkzeug: NaN</span> </div></td>
+    <td>Insp</td>
+    <td></td>
+    <td>5000 h</td>
+    <td style="background-color:rgb(200,200,200)"><div class="tooltip">N/A<span class="tooltiptext"></span> </div></td>
+    <td style="background-color:rgb(0.000000, 255.000000, 0)"><div class="tooltip">2022-04-14<span class="tooltiptext">No assignment scheduled</span> </div></td>
+    <td>(30)</td>
+  </tr>
+  <tr>
+    <td></td>
+    <td>[129 MI] Laengsfoerderband</td>
+    <td>  <div class="tooltip">Buerstenschmierung/ Buersten/ nachstroemen von frischem Fett  kontrollieren/ ggf. tauschen<span class="tooltiptext">Details: Maschine in Postition bringen.Hauptschalter -aus- Pruefen der Laufflaechen ob Fett hierauf ist?Ggf. Pinsel nachstellen oder wechseln. Kein Fett nachstroemen beobachtbar<br>Ersatzteil: Schmierpinsel(2247841)2x<br>Werkzeug: NaN</span> </div></td>
+    <td>Insp</td>
+    <td></td>
+    <td>5000 h</td>
+    <td style="background-color:rgb(200,200,200)"><div class="tooltip">N/A<span class="tooltiptext"></span> </div></td>
+    <td style="background-color:rgb(0.000000, 255.000000, 0)"><div class="tooltip">2022-04-14<span class="tooltiptext">No assignment scheduled</span> </div></td>
+    <td>(10)</td>
+  </tr>
+  <tr>
+    <td></td>
+    <td>[132 MU] Fuehrungswagen</td>
+    <td>  <div class="tooltip">Vorsatzdichtung/ aussenliegend am Fuehrungs-/Messwagen der Y-Achse  wechseln<span class="tooltiptext">Details: NaN<br>Ersatzteil: 2247027<br>Werkzeug: NaN</span> </div></td>
+    <td>Insp</td>
+    <td></td>
+    <td>730 T</td>
+    <td style="background-color:rgb(200,200,200)"><div class="tooltip">N/A<span class="tooltiptext"></span> </div></td>
+    <td style="background-color:rgb(0.000000, 255.000000, 0)"><div class="tooltip">2022-07-28<span class="tooltiptext">No assignment scheduled</span> </div></td>
+    <td>(10)</td>
+  </tr>
+  <tr>
+    <td></td>
+    <td>[136 NO] Automatischer Duesenwechsler (Option)</td>
+    <td>  <div class="tooltip">Linearfuehrungen reinigen und schmieren<span class="tooltiptext">Details: Optional auch Microlube_GL261(0355132)<br>Ersatzteil: Microlube_GB00 (0111780) 0/1x<br>Werkzeug: NaN</span> </div></td>
+    <td>Insp</td>
+    <td></td>
+    <td>1000 T</td>
+    <td style="background-color:rgb(200,200,200)"><div class="tooltip">N/A<span class="tooltiptext"></span> </div></td>
+    <td style="background-color:rgb(0.000000, 255.000000, 0)"><div class="tooltip">2023-04-24<span class="tooltiptext">No assignment scheduled</span> </div></td>
+    <td>(60)</td>
+  </tr>
+  <tr>
+    <td></td>
+    <td>[139 SC] NCU</td>
+    <td>  <div class="tooltip">Luefter fuer SINAMICS Solution Line Module ersetzen<span class="tooltiptext">Details: - vergl. auch ID 68 bzw. ID 137<br>Ersatzteil: 6SL3120-2TE21-0AD0 / 1(2023085) <br>Werkzeug: Drehmomentschluessel </span> </div></td>
+    <td>Insp</td>
+    <td></td>
+    <td>1500 T</td>
+    <td style="background-color:rgb(200,200,200)"><div class="tooltip">N/A<span class="tooltiptext"></span> </div></td>
+    <td style="background-color:rgb(0.000000, 255.000000, 0)"><div class="tooltip">2024-09-05<span class="tooltiptext">No assignment scheduled</span> </div></td>
+    <td>(40)</td>
+  </tr>
+  <tr>
+    <td></td>
+    <td>[125 MH] Hydraulikaggregat</td>
+    <td>  <div class="tooltip">Oel nachfuellen<span class="tooltiptext">Details: NaN<br>Ersatzteil: 0419693 Hydraulikoel Avilub Fluid HVD 46 (210l Fass)<br>Werkzeug: NaN</span> </div></td>
+    <td>  <div class="tooltip">100<span class="tooltiptext">Fuellgrad <br>Sollzustand=voll=100%</span> </div></td>
+    <td></td>
+    <td>0 M</td>
+    <td style="background-color:rgb(200,200,200)"><div class="tooltip">N/A<span class="tooltiptext"></span> </div></td>
+    <td>  </td>
+    <td>(15)</td>
+  </tr>
+</table>
+</div>
+<div id=Menu1>
+<h1>Menue</h1>
+<p>Faelligkeit:</p>
+<input type="text" class="txt1" id="txtDue52" value="2020-01-01">
+ <p>Wartungsmitarbeiter:</p>
+<select class="txt1" id="rollPers52" onchange="reselskill();" >
+  <option value="Monika_Mallok_[37372]">Monika Mallok - Wartungspersonal</option>
+  <option value="Andreas_ Schaible_[39683]">Andreas Schaible - Bediener</option>
+  <option value="Harry_Wild_[37378]">Harry Wild - Trumpf Service</option>
+</select>
+<p>Kommentar:</p>
+<input type="text" class="txt1" id="txtComment" value="Entry_by_console">
+<p>Action:</p>
+<button id="get-btn"  onclick="sendhtml()">Create Maintenance Task</button>
+<button onclick="skiptask()">Skip Tasks</button>
+<button onclick="OKtask()">Task OK</button>
+<button onclick="Interv()">Intervall aendern</button>
+<p> </p>
+</div>
+
+
+<script>
+function opentab(evt, cityName) {
+  var i, tabcontent, tablinks;
+  tabcontent = document.getElementsByClassName("tabcontent");
+  for (i = 0; i < tabcontent.length; i++) {
+    tabcontent[i].style.display = "none";
+  }
+  tablinks = document.getElementsByClassName("tablinks");
+  for (i = 0; i < tablinks.length; i++) {
+    tablinks[i].className = tablinks[i].className.replace(" active", "");
+  }
+  document.getElementById(cityName).style.display = "block";
+  evt.currentTarget.className += " active";
+  document.getElementById('Menu1').style.display = "block";
+}
+document.getElementById('General').style.display = "block";
+document.getElementById('Menu1').style.display = "none";
+var a = Array(100).fill(0);
+const str1="https://gi5riruizb.execute-api.us-west-2.amazonaws.com/prod?val1=vfw001&val2=dat";
+
+function sendhtml() {
+ 
+     var t1 = document.getElementById("txtDue").value;
+     var t2 = document.getElementById("rollPers").value;
+     var t3 = document.getElementById("txtComment").value;
+      for (var ii = 0; ii < 100; ii++) {
+        if (a[ii]) {
+        str=str1 + "&val3="+ii+"&val4=NextAssignID&val5=22110526&val6=NextAssignPers&val7=" + t2 + "&val8=NextAssignTS&val9=" + t1 + "&val10=ProcessState&val11=1" // temp local exec mit convaws.m
+        console.log(str);
+        axios.get(str).then(response => {console.log(response);  });
+        }
+      }
+   //window.alert("please refresh after processing (20s)");
+ 
+setTimeout(() => {   window.location.reload(); }, 3000);
+  };
+
+  function skiptask() {
+  var t1 = document.getElementById("txtDue").value;
+  var t2 = document.getElementById("rollPers").value;
+  var t3 = document.getElementById("txtComment").value;
+
+ if (1) {
+        for (var ii = 0; ii < 100; ii++) {
+        if (a[ii]) {
+          str=str1 + "&val3="+ii+"&val4=cond_state&val5=4&val6=cond_txt&val7=" + t3 + "&val8=NextDue&val9=" + t1 + "&val10=ProcessState&val11=3" 
+		  console.log(str)
+          axios.get(str).then(response => {console.log(response);  });
+          }
+        }
+      }
+
+  setTimeout(() => {   window.location.reload(); }, 3000);
+  };
+
+
+  function OKtask() {
+  var t1 = document.getElementById("txtDue").value;
+  var t2 = document.getElementById("rollPers").value;
+  var t3 = document.getElementById("txtComment").value;
+ if (1) {
+        for (var ii = 0; ii < 100; ii++) {
+        if (a[ii]) {
+          str=str1 + "&val3="+ii+"&val4=cond_state&val5=1&val6=cond_txt&val7=" + t3 + "&val8=NextDue&val9=" + t1 + "&val10=ProcessState&val11=3" 
+		  console.log(str)
+          axios.get(str).then(response => {console.log(response);  });
+          }
+        }
+      }
+setTimeout(() => {   window.location.reload(); }, 3000);
+  };
+
+  function Interv() {
+ var sdat = prompt("Please enter new interval", "1");
+ if (sdat) {
+        for (var ii = 0; ii < 100; ii++) {
+        if (a[ii]) {
+          str=str1 + "&val3="+ii+"&val4=INT_value&val5="+sdat+"&val6=ProcessState&val7=3"
+		  console.log(str)
+          axios.get(str).then(response => {console.log(response);  });
+         console.log(str1 + "?val1="+ii+"&val2=INT_value&val3=" + sdat +"&val4=INT_value&val5=" + sdat+"&val6=INT_value&val7=" + sdat+"&val8=INT_value&val9=" + sdat )
+          }
+        }
+      }
+setTimeout(() => {   window.location.reload(); }, 3000);
+
+  };
+
+
+</script>
+   
+</body>
+</html> 
