@@ -1,0 +1,710 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+
+<style>
+body {font-family: Arial;}
+
+body{font-size:20px;font-family:Open Sans, Segoe UI, Helvetica!important;background:rgb(240, 240, 240);}
+input,select,textarea{font-weight:400; font-size:1em!important;line-height:1.375em;font-family:Open Sans, Segoe UI, Helvetica!important;}
+h1, h2, h3, h4, h5, h6 {font-family:Open Sans, Segoe UI, Helvetica!important;line-height:2em}
+p {font-family:Open Sans, Segoe UI, Helvetica!important;line-height:1em;font-size:20px;}
+* {
+  padding-left: 10px;
+}
+.b1, .b2, .dd2 {
+ background-color: #888888; 
+  border: none;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  border-radius: 5px;
+  border: 1px solid black
+  }
+
+.txt1{
+width: 100%;
+height: 40px;
+margin: 4px 2px;
+border: 1px solid black
+}
+.b1 {
+  width: 22%;
+  height: 40px;
+}
+
+ button.pressed {
+       background-color: rgb(165, 165, 165);
+}
+
+#tables {
+  font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+#red {background-color: #fffff0}
+
+#tables td, #tables th {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+#tables tr:nth-child(even){background-color: #f2f2f2;}
+
+#tables th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: rgb(112, 112, 112);
+  color: white;
+}
+
+.fixed_header tbody{
+  display:block;
+  overflow:auto;
+  height:200px;
+  width:100%;
+}
+.fixed_header thead tr{
+  display:block;
+}
+
+.tooltip {
+  position: relative;
+  display: inline-block;
+  border-bottom: 1px dotted black;
+}
+
+.tooltip .tooltiptext {
+  visibility: hidden;
+  width: 120px;
+  background-color: #555;
+  color: #fff;
+  text-align: left;
+  width: 700px;
+  border-radius: 6px;
+  padding: 5px 0;
+  position: absolute;
+  z-index: 1;
+  bottom: 125%;
+  left: -50%;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.tooltip .tooltiptext::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: #555 transparent transparent transparent;
+}
+
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+  opacity: 1;
+}
+
+/* Style the tab */
+.tab {
+  overflow: hidden;
+  border: 1px solid #ccc;
+  background-color: #f1f1f1;
+}
+
+/* Style the buttons inside the tab */
+.tab button {
+  background-color: inherit;
+  float: left;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  padding: 14px 16px;
+  transition: 0.3s;
+  font-size: 17px;
+}
+
+/* Change background color of buttons on hover */
+.tab button:hover {
+  background-color: #ddd;
+}
+
+/* Create an active/current tablink class */
+.tab button.active {
+  background-color: #ccc;
+}
+
+/* Style the tab content */
+.tabcontent {
+  display: none;
+  padding: 6px 12px;
+  border: 1px solid #ccc;
+  border-top: none;
+}
+</style>
+</head>
+<body>
+
+    <img src="http://trumpfgate.com/Images/logo.jpg" alt="Logo" >
+    <table>
+      <tr>
+        <td> <img src="3030.jpg" alt="Logo" width="400px" >
+          <p style="background-color: rgb(255,0,0);"><br><b>Overdue: 2020-04-20  -  Bad condition </b><br>. </p></td>
+        <td>
+  <table>
+    <tr><td>Kunde</td><td>Maier GmbH</td>  </tr>
+    <tr><td>Wartungsvetrag</td><td>Premium</td>  </tr>
+    <tr><td><b>Maschine</b></td><td><b>A0221A23432</b></td>  </tr>
+    <tr><td>Lasertyp</td><td>TruFlow3200 A65435E6654</td>  </tr>
+    <tr><td>-</td><td></td>  </tr>
+    <tr><td>Next AuftragsID</td><td>03080732</td>  </tr>  
+    <tr><td>Erstellung</td><td>03-Jul-2020 08:09:32</td>  </tr> 
+    <tr><td>Betriebsstundenzaehler</td><td>6546565</td>  </tr>
+    <tr><td>Strahl an</td><td>654654</td>  </tr>
+ </table>
+
+</table>
+  <p> </p>
+  <p> </p>
+  
+
+<div class="tab">
+  <button class="tablinks" onclick="opentab(event, 'General')">General</button>
+  <button class="tablinks" onclick="opentab(event, 'Status')">Historie</button>
+  <button class="tablinks" onclick="opentab(event, 'Operator')">Staus Operator</button>
+  <button class="tablinks" onclick="opentab(event, 'Maintenance')">Tasks Maintenance</button>
+  <button class="tablinks" onclick="opentab(event, 'TRUMPF')">Status TRUMPF</button>
+</div>
+
+ <!--****************************************--> 
+<div id="General" class="tabcontent">
+  <h3>General Information</h3>
+  <table>
+    <tr><td>Kunde</td><td>Maier GmbH</td>  </tr>
+    <tr><td>Wartungsvetrag</td><td>Premium</td>  </tr>
+    <tr><td><b>Maschine</b></td><td><b>A0221A23432</b></td>  </tr>
+    <tr><td>Lasertyp</td><td>TruFlow3200 A65435E6654</td>  </tr>
+    <tr><td>Option</td><td>Rotolas</td>  </tr>
+    <tr><td>Option</td><td>Brightline</td>  </tr>
+    <tr><td>-</td><td></td>  </tr>
+    <tr><td>Ansprechpartner Kunde</td><td>Hr. Mueller, Tel: 01523-254152432</td>  </tr>  
+    <tr><td>Ansprechpartner TRUMPF</td><td>Servicehotline, Tel: 0800-254152432</td>  </tr>  
+ </table>
+
+</div>
+
+ <!--****************************************--> 
+<div id="Status" class="tabcontent">
+  <h3>Historie der letzten Einsaetze</h3>
+  
+  <table>
+    <tr><td>10.07.2020</td><td>Operator</td> <td>Status: OK</td> <td><a href="https://www.w3schools.com/">Report</a></td> </tr>
+    <tr><td>09.07.2020</td><td>Operator</td> <td>Status: OK</td> <td><a href="https://www.w3schools.com/">Report</a></td> </tr>
+    <tr><td>08.07.2020</td><td>Operator</td> <td>Status: OK</td> <td><a href="https://www.w3schools.com/">Report</a></td> </tr>
+    <tr><td>08.07.2020</td><td>Wartungsreport: Maier</td> <td>Status: OK</td> <td><a href="https://www.w3schools.com/">Report</a></td> </tr>
+    <tr><td>04.07.2020</td><td>Operator</td> <td>Status: OK</td> <td><a href="https://www.w3schools.com/">Report</a></td> </tr>
+    <tr><td>03.07.2020</td><td>Operator</td> <td>Status: OK</td> <td><a href="https://www.w3schools.com/">Report</a></td> </tr>
+    <tr><td>02.07.2020</td><td>Operator</td> <td>Status: OK</td> <td><a href="https://www.w3schools.com/">Report</a></td> </tr>
+    <tr><td>01.07.2020</td><td>Operator</td> <td>Status: OK</td> <td><a href="https://www.w3schools.com/">Report</a></td> </tr>
+    <tr><td>10.06.2020</td><td>Operator</td> <td>Status: OK</td> <td><a href="https://www.w3schools.com/">Report</a></td> </tr>
+    <tr><td>10.06.2020</td><td>Operator</td> <td>Status: OK</td> <td><a href="https://www.w3schools.com/">Report</a></td> </tr>
+
+ </table>p> 
+</div>
+
+
+
+ <!--****************************************--> 
+<div id="Operator" class="tabcontent">
+    <table id="tables">
+        <tr>
+          <th></th>
+          <th>Wartungsstelle</th>
+          <th>Wartungsaufgabe</th>
+          <th>Soll</th>
+          <th>Ist</th>
+          <th>Skill</th>
+          <th>Zustand</th>
+          <th>___Faellig___</th>
+          <th>  <div class="tooltip">Dauer[HZ]<span class="tooltiptext">Dauer in min<br>[] = HZP</span> </div></th>
+        </tr>
+        <tr>
+          <td><input type="checkbox" class="ch1"  onclick="a[67]=67;"><br></td>
+          <td>[67 MH] Schutzzaun</td>
+          <td>  <div class="tooltip">Lamellenvorhang und Sichtschutzbleche kontrollieren<span class="tooltiptext">Details: <br>Ersatzteil: SP MAT6565487<br>Werkzeug: </span> </div></td>
+          <td>Insp</td>
+          <td></td>
+          <td>Bedien</td>
+          <td style="background-color:rgb(255,0,0)"><div class="tooltip">critical<span class="tooltiptext">* Action needed: *<br>Assign#: 587710<br>LastAssign:<br>Comments:</span> </div></td>
+          <td style="background-color:rgb(246.584460, 255.000000, 0)"><div class="tooltip">2020-07-04<span class="tooltiptext">No assignment scheduled</span> </div></td>
+          <td>[5]</td>
+        </tr>
+        <tr>
+          <td><input type="checkbox" class="ch1"  onclick="a[68]=68;"><br></td>
+          <td>[68 MH] Palette</td>
+          <td>  <div class="tooltip">Blendleiste kontrollieren<span class="tooltiptext">Details: <br>Ersatzteil: SP MAT6565488<br>Werkzeug: </span> </div></td>
+          <td>Insp</td>
+          <td></td>
+          <td>Bedien</td>
+          <td style="background-color:rgb(0,255,0)"><div class="tooltip">OK<span class="tooltiptext">Assign#: 509552<br>LastAssign:<br>Comments:</span> </div></td>
+          <td style="background-color:rgb(255, 0, 0)"><div class="tooltip">2020-06-04<span class="tooltiptext">No assignment scheduled</span> </div></td>
+          <td>5</td>
+        </tr>
+        <tr>
+          <td><input type="checkbox" class="ch2"  onclick="a[79]=79;"><br></td>
+          <td>[79 MI] Laengsfoerderband</td>
+          <td>  <div class="tooltip">Abdeckung Laengs- zu Querfoerderband in der Maschine hinten reinigen<span class="tooltiptext">Details: Paletten und Schottbleche muessen raus. Bei 4+6m mehr Zeit fuer Abdeckungs ausbauen, da dies mehrteilig ist.<br>Ersatzteil: SP MAT6565493<br>Werkzeug: </span> </div></td>
+          <td>Insp</td>
+          <td></td>
+          <td>Bedien</td>
+          <td style="background-color:rgb(0,255,0)"><div class="tooltip">OK<span class="tooltiptext">Assign#: 509552<br>LastAssign:<br>Comments:</span> </div></td>
+          <td style="background-color:rgb(255, 0, 0)"><div class="tooltip">2020-06-04<span class="tooltiptext">No assignment scheduled</span> </div></td>
+          <td>10</td>
+        </tr>
+        <tr>
+          <td><input type="checkbox" class="ch1"  onclick="a[23]=23;"><br></td>
+          <td>[23 ES] Kompaktentstauber</td>
+          <td>  <div class="tooltip">Differenzdruckanzeige Anzeige im Bereich von 8-16mbar kontrollieren<span class="tooltiptext">Details: <br>Ersatzteil: SP MAT6565465<br>Werkzeug: </span> </div></td>
+          <td>Y/N</td>
+          <td></td>
+          <td>Bedien</td>
+          <td style="background-color:rgb(200,200,200)"><div class="tooltip">N/A<span class="tooltiptext"></span> </div></td>
+          <td style="background-color:rgb(255, 0, 0)"><div class="tooltip">2020-06-05<span class="tooltiptext">No assignment scheduled</span> </div></td>
+          <td>[2]</td>
+        </tr>
+        <tr>
+          <td><input type="checkbox" class="ch1"  onclick="a[81]=81;"><br></td>
+          <td>[81 MI] Absaugmodul</td>
+          <td>  <div class="tooltip">Schottbleche, Gitterbleche, Schutzplatten und Absaugklappen reinigen, ggf. tauschen<span class="tooltiptext">Details: <br>Ersatzteil: SP MAT6565495<br>Werkzeug: </span> </div></td>
+          <td>Insp</td>
+          <td></td>
+          <td>Bedien</td>
+          <td style="background-color:rgb(200,200,200)"><div class="tooltip">N/A<span class="tooltiptext"></span> </div></td>
+          <td style="background-color:rgb(255, 0, 0)"><div class="tooltip">2020-06-05<span class="tooltiptext">No assignment scheduled</span> </div></td>
+          <td>30</td>
+        </tr>
+        <tr>
+          <td><input type="checkbox" class="ch1"  onclick="a[82]=82;"><br></td>
+          <td>[82 MI] Absaugklappen</td>
+          <td>  <div class="tooltip">Verschmutzung und Funktion  kontrollieren, ggf. reinigen<span class="tooltiptext">Details: <br>Ersatzteil: SP MAT6565496<br>Werkzeug: </span> </div></td>
+          <td>Insp</td>
+          <td></td>
+          <td>Bedien</td>
+          <td style="background-color:rgb(200,200,200)"><div class="tooltip">N/A<span class="tooltiptext"></span> </div></td>
+          <td style="background-color:rgb(255, 0, 0)"><div class="tooltip">2020-06-05<span class="tooltiptext">No assignment scheduled</span> </div></td>
+          <td>30</td>
+        </tr>
+        <tr>
+          <td><input type="checkbox" class="ch1"  onclick="a[87]=87;"><br></td>
+          <td>[87 MI] Schlackeschubladen</td>
+          <td>  <div class="tooltip">Verschleissbleche  kontrollieren, ggf. tauschen<span class="tooltiptext">Details: <br>Ersatzteil: <br>Werkzeug: </span> </div></td>
+          <td>Insp</td>
+          <td></td>
+          <td>Bedien</td>
+          <td style="background-color:rgb(200,200,200)"><div class="tooltip">N/A<span class="tooltiptext"></span> </div></td>
+          <td style="background-color:rgb(255, 0, 0)"><div class="tooltip">2020-06-05<span class="tooltiptext">No assignment scheduled</span> </div></td>
+          <td>10</td>
+        </tr>
+    </table>   
+  </div>
+
+
+  <!--****************************************--> 
+  <div id="Maintenance" class="tabcontent">
+    <h3>Tasks for the meintenance personal</h3>
+  
+    <table>
+        <tr>
+          <td>
+              
+            <p><button class="w3-button w3-red">Create mission in MaintenanceX</button></p>
+
+    <table>
+      <tr><td><b>Maschine</b></td><td><b>A0221A23432 </b></td>  </tr>
+      <tr><td>-</td><td></td>  </tr>
+      <tr><td>Next AuftragsID</td><td>03080732</td>  </tr>  <tr><td>Erstellung</td><td>03-Jul-2020 08:09:32      .   .</td>  </tr>  <tr><td>Betriebsstundenzaehler der Maschine</td><td>6546565</td>  </tr>
+    </table>
+    <td>
+    <p>Due date:</p>
+    <input type="text" class="txt1" id="text2" value="2020-07-23">
+     <p>Wartungsmitarbeiter:</p>
+    <select class="txt1" id="text1" onchange="reselskill();" >
+      <option value="2 Monika Mallok [37372]">Monika Mallok - Wartungspersonal</option>
+      <option value="5 Norbert Haeberle [37379]">Norbert Haeberle - Elektrofachkraft</option>
+      <option value="1 Andreas Schaible [39683]">Andreas Schaible - Wartungspersonal</option>
+      <option value="1 Susanne Koehler [39685]">Susanne Koehler - Bediener</option>
+    </select>
+      </table>
+    <p> <br> <br> </p>
+    <p> </p>
+
+<table>
+    <tr>
+        <th></th>
+        <th>Wartungsstelle</th>
+        <th>Wartungsaufgabe</th>
+        <th>Soll</th>
+        <th>Ist</th>
+        <th>Skill</th>
+        <th>Zustand</th>
+        <th>___Faellig___</th>
+        <th>  <div class="tooltip">Dauer[HZ]<span class="tooltiptext">Dauer in min<br>[] = HZP</span> </div></th>
+      </tr>
+<tr>
+    <td><input type="checkbox" class="ch2"  onclick="a[61]=61;"><br></td>
+    <td>[61 MH] Verrohrung / Verschlauchung</td>
+    <td>  <div class="tooltip">Hydraulikleitungen kontrollieren<span class="tooltiptext">Details: <br>Ersatzteil: SP MAT6565484<br>Werkzeug: </span> </div></td>
+    <td>Insp</td>
+    <td></td>
+    <td>Wart</td>
+    <td style="background-color:rgb(200,200,200)"><div class="tooltip">N/A<span class="tooltiptext"></span> </div></td>
+    <td style="background-color:rgb(0.000000, 255.000000, 0)"><div class="tooltip">2020-11-15<span class="tooltiptext">No assignment scheduled</span> </div></td>
+    <td>10</td>
+  </tr>
+  <tr>
+    <td><input type="checkbox" class="ch4"  onclick="a[62]=62;"><br></td>
+    <td>[62 MH] Paletteneinzug</td>
+    <td>  <div class="tooltip">Kettenspannung (am Spanner) pruefen, ggf. nachspannen<span class="tooltiptext">Details: Abstand in der Kettenspannvorrichtung, im Maschineninnenraum, linkes Seitenteil zwischen Gleitstein und Zeiger des Federspanners<br>Ersatzteil: SP MAT6565485<br>Werkzeug: </span> </div></td>
+    <td>Insp</td>
+    <td></td>
+    <td>Trumpf</td>
+    <td style="background-color:rgb(200,200,200)"><div class="tooltip">N/A<span class="tooltiptext"></span> </div></td>
+    <td style="background-color:rgb(0.000000, 255.000000, 0)"><div class="tooltip">2020-11-15<span class="tooltiptext">No assignment scheduled</span> </div></td>
+    <td>10</td>
+  </tr>
+  <tr>
+    <td><input type="checkbox" class="ch1"  onclick="a[63]=63;"><br></td>
+    <td>[63 MH] Palettenwechsler</td>
+    <td>  <div class="tooltip">Laufrollen der Paletten, Buersten und Fuehrungsbahnen kontrollieren, ggf. reinigen<span class="tooltiptext">Details: Maschine in Postition bringen.\nHauptschalter aus \n24V Netzteil Bremse des PaWe Motor lueften.<br>Ersatzteil: SP MAT6565486<br>Werkzeug: </span> </div></td>
+    <td>Insp</td>
+    <td></td>
+    <td>Bedien</td>
+    <td style="background-color:rgb(200,200,200)"><div class="tooltip">N/A<span class="tooltiptext"></span> </div></td>
+    <td style="background-color:rgb(0.000000, 255.000000, 0)"><div class="tooltip">2020-11-15<span class="tooltiptext">No assignment scheduled</span> </div></td>
+    <td>60</td>
+  </tr>
+  <tr>
+    <td><input type="checkbox" class="ch2"  onclick="a[73]=73;"><br></td>
+    <td>[73 MH] Palettenwechsler</td>
+    <td>  <div class="tooltip">Parksaeulen schmieren<span class="tooltiptext">Details: <br>Ersatzteil: Trockenschmiermittel Dry Lube (0367578)<br>Werkzeug: </span> </div></td>
+    <td>Insp</td>
+    <td></td>
+    <td>Wart</td>
+    <td style="background-color:rgb(200,200,200)"><div class="tooltip">N/A<span class="tooltiptext"></span> </div></td>
+    <td style="background-color:rgb(0.000000, 255.000000, 0)"><div class="tooltip">2020-11-15<span class="tooltiptext">No assignment scheduled</span> </div></td>
+    <td>15</td>
+  </tr>
+  <tr>
+    <td><input type="checkbox" class="ch2"  onclick="a[74]=74;"><br></td>
+    <td>[74 MH] Paletteneinzug</td>
+    <td>  <div class="tooltip">Antrieb kontrollieren<span class="tooltiptext">Details: <br>Ersatzteil: <br>Werkzeug: </span> </div></td>
+    <td>Insp</td>
+    <td></td>
+    <td>Wart</td>
+    <td style="background-color:rgb(200,200,200)"><div class="tooltip">N/A<span class="tooltiptext"></span> </div></td>
+    <td style="background-color:rgb(0.000000, 255.000000, 0)"><div class="tooltip">2020-11-15<span class="tooltiptext">No assignment scheduled</span> </div></td>
+    <td>10</td>
+  </tr>
+  <tr>
+    <td><input type="checkbox" class="ch2"  onclick="a[75]=75;"><br></td>
+    <td>[75 MH] Fuehrungsgestell</td>
+    <td>  <div class="tooltip">Mechanik Palettentuere schmieren<span class="tooltiptext">Details: <br>Ersatzteil: Trockenschmiermittel Dry Lube (0367578)<br>Werkzeug: </span> </div></td>
+    <td>Insp</td>
+    <td></td>
+    <td>Wart</td>
+    <td style="background-color:rgb(200,200,200)"><div class="tooltip">N/A<span class="tooltiptext"></span> </div></td>
+    <td style="background-color:rgb(0.000000, 255.000000, 0)"><div class="tooltip">2020-11-15<span class="tooltiptext">No assignment scheduled</span> </div></td>
+    <td>10</td>
+  </tr>
+  <tr>
+    <td><input type="checkbox" class="ch1"  onclick="a[90]=90;"><br></td>
+    <td>[90 MU] Faltenbalg</td>
+    <td>  <div class="tooltip">Faltenbaelge der X-, Y- und Z-Achsen kontrollieren, ggf. reinigen<span class="tooltiptext">Details: <br>Ersatzteil: SP MAT6565497<br>Werkzeug: Staubsauger</span> </div></td>
+    <td>Insp</td>
+    <td></td>
+    <td>Bedien</td>
+    <td style="background-color:rgb(200,200,200)"><div class="tooltip">N/A<span class="tooltiptext"></span> </div></td>
+    <td style="background-color:rgb(0.000000, 255.000000, 0)"><div class="tooltip">2020-11-15<span class="tooltiptext">No assignment scheduled</span> </div></td>
+    <td>60</td>
+  </tr>
+  <tr>
+    <td><input type="checkbox" class="ch1"  onclick="a[91]=91;"><br></td>
+    <td>[91 MU] Zahnstangen X-Achse</td>
+    <td>  <div class="tooltip">Zahnstangen reinigen<span class="tooltiptext">Details: Paletten raus.\nSchottbleche raus.\nHauptschalter aus.\nSchmieren und Bewegungseinheit schieben um alle Bereiche zu reinigen.<br>Ersatzteil: SP MAT6565498<br>Werkzeug: </span> </div></td>
+    <td>Insp</td>
+    <td></td>
+    <td>Bedien</td>
+    <td style="background-color:rgb(200,200,200)"><div class="tooltip">N/A<span class="tooltiptext"></span> </div></td>
+    <td style="background-color:rgb(0.000000, 255.000000, 0)"><div class="tooltip">2020-11-15<span class="tooltiptext">No assignment scheduled</span> </div></td>
+    <td>120</td>
+  </tr>
+  <tr>
+    <td><input type="checkbox" class="ch1"  onclick="a[92]=92;"><br></td>
+    <td>[92 MU] Bewegungseinheit</td>
+    <td>  <div class="tooltip">Fettauffangwanne reinigen<span class="tooltiptext">Details: <br>Ersatzteil: SP MAT6565499<br>Werkzeug: </span> </div></td>
+    <td>Insp</td>
+    <td></td>
+    <td>Bedien</td>
+    <td style="background-color:rgb(200,200,200)"><div class="tooltip">N/A<span class="tooltiptext"></span> </div></td>
+    <td style="background-color:rgb(0.000000, 255.000000, 0)"><div class="tooltip">2020-11-15<span class="tooltiptext">No assignment scheduled</span> </div></td>
+    <td>15</td>
+  </tr>
+  <tr>
+    <td><input type="checkbox" class="ch1"  onclick="a[93]=93;"><br></td>
+    <td>[93 MU] Bewegungseinheit</td>
+    <td>  <div class="tooltip">Spritzschutzblech Z-Achse reinigen<span class="tooltiptext">Details: innen <br>Ersatzteil: SP MAT6565500<br>Werkzeug: </span> </div></td>
+    <td>Insp</td>
+    <td></td>
+    <td>Bedien</td>
+    <td style="background-color:rgb(200,200,200)"><div class="tooltip">N/A<span class="tooltiptext"></span> </div></td>
+    <td style="background-color:rgb(0.000000, 255.000000, 0)"><div class="tooltip">2020-11-15<span class="tooltiptext">No assignment scheduled</span> </div></td>
+    <td>15</td>
+  </tr>
+  <tr>
+    <td><input type="checkbox" class="ch4"  onclick="a[94]=94;"><br></td>
+    <td>[94 MU] Zahnstangen X-Achse</td>
+    <td>  <div class="tooltip">Umkehrspiel in X pruefen<span class="tooltiptext">Details: <br>Ersatzteil: SP MAT6565501<br>Werkzeug: Messuhr\nFestanschlag (1525015) 4x</span> </div></td>
+    <td>  <div class="tooltip">12.0<span class="tooltiptext">Umkehrspiel zwischen 10 u 15 Nm</span> </div></td>
+    <td></td>
+    <td>Trumpf</td>
+    <td style="background-color:rgb(200,200,200)"><div class="tooltip">N/A<span class="tooltiptext"></span> </div></td>
+    <td style="background-color:rgb(0.000000, 255.000000, 0)"><div class="tooltip">2020-11-15<span class="tooltiptext">No assignment scheduled</span> </div></td>
+    <td>15</td>
+  </tr>
+</table>
+</div>
+
+   <!--****************************************--> 
+  <div id="TRUMPF" class="tabcontent">
+    <h3>Status of the last TRUMPF Wartung</h3>
+    <p>Letzte durchgefuehrte Wartung von Trumpfmitabeiter Mueller am 01.02.2020</p>
+    <p>naechste Faellige Wartung am 01.08.2020</p>
+    <h3>Notizen der letzten TRUMPF Wartung</h3>
+    <p>Die Auflageleisten scheinen zu selten gewechselt zu werden</p>
+    <p>Wasserfilter ist an verschleissgrenze und sollte getauscht weren</p>
+    
+    <table id="tables">
+        <tr>
+            <th></th>
+            <th>Vor - und Nachbereitende Taetigkeiten</th>
+            <th>Detail</th>
+            <th>Soll</th>
+            <th>Ist</th>
+            <th>Zustand</th>
+            </tr>
+    <tr>
+        <td>Vor</td>
+        <td>Kontrolle der letzten Wartungscheckliste</td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td style="background-color:rgb(0,255,0)"><div class="tooltip">OK<span class="tooltiptext">Assign#: 509209<br>LastAssign:<br>Comments:</span> </div></td>
+      </tr>
+      <tr>
+        <td>Nach</td>
+        <td>Testteil nach der Wartung schneiden</td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td style="background-color:rgb(0,255,0)"><div class="tooltip">OK<span class="tooltiptext">Assign#: 509209<br>LastAssign:<br>Comments:</span> </div></td>
+      </tr>
+      <tr>
+        <td></td>
+        <td>Wartungsmerker in HMI zuruecksetzen</td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td style="background-color:rgb(0,255,0)"><div class="tooltip">OK<span class="tooltiptext">Assign#: 509209<br>LastAssign:<br>Comments:</span> </div></td>
+      </tr>
+      <tr>
+        <td></td>
+        <td>Wartungsergebnis mit Kunden durchgehen</td>
+        <td>Wartungsmanager Huber am 25.6.2020</td>
+        <td></td>
+        <td></td>
+        <td style="background-color:rgb(0,255,0)"><div class="tooltip">OK<span class="tooltiptext">Assign#: 509209<br>LastAssign:<br>Comments:</span> </div></td>
+      </tr>
+    </table>
+
+
+    <h3>Details der letzten TRUMPF Wartung</h3>
+    <table id="tables">
+        <tr>
+            <th></th>
+            <th>Wartungsstelle Kuehlaggregat</th>
+            <th>Wartungsaufgabe</th>
+            <th>Soll</th>
+            <th>Ist</th>
+            <th>Zustand</th>
+            <th></th>
+            <th></th>
+         </tr>
+    <tr>
+        <td><input type="checkbox" class="ch4"  onclick="a[10]=10;"><br></td>
+        <td>[10 CU] Kuehlaggregat</td>
+        <td>  <div class="tooltip">Widerstand zwischen Palette und Gehaeuse Schneideinheit pruefen<span class="tooltiptext">Details: <br>Ersatzteil: <br>Werkzeug: Multimeter</span> </div></td>
+        <td>  <div class="tooltip">3.0<span class="tooltiptext">Widerstand <=  3 Ohm</span> </div></td>
+        <td>2.5</td>
+        <td style="background-color:rgb(0,255,0)"><div class="tooltip">OK<span class="tooltiptext">Assign#: 509209<br>LastAssign:<br>Comments:</span> </div></td>
+      </tr>
+      <tr>
+        <td><input type="checkbox" class="ch4"  onclick="a[1]=1;"><br></td>
+        <td>[1 BG] Kuehlaggregat</td>
+        <td>  <div class="tooltip">LLK auf Beschaedigung und Kuehlschlaeuche auf Dichtheit pruefen<span class="tooltiptext">Details: <br>Ersatzteil: <br>Werkzeug: Trittleiter</span> </div></td>
+        <td>Insp</td>
+        <td></td>
+        <td style="background-color:rgb(0,255,0)"><div class="tooltip">OK<span class="tooltiptext">Assign#: 509209<br>LastAssign:<br>Comments:</span> </div></td>
+      </tr>
+      <tr>
+        <td><input type="checkbox" class="ch2"  onclick="a[3]=3;"><br></td>
+        <td>[3 CO] Kuehlaggregat</td>
+        <td>  <div class="tooltip">Kuehlwasser (Filltersieb muss mit gereinigt werden) wechseln<span class="tooltiptext">Details: <br>Ersatzteil: DI-Wasser -\nKuehlwasserzusaetze (laenderspezifisch) \nEasy-Kit Cu-4 Stdrd 120-359L <> USA, CAN, B, NL (1653107)<br>Werkzeug: </span> </div></td>
+        <td>Insp</td>
+        <td></td>
+        <td style="background-color:rgb(0,255,0)"><div class="tooltip">OK<span class="tooltiptext">Assign#: 509209<br>LastAssign:<br>Comments:</span> </div></td>
+      </tr>
+      <tr>
+        <td><input type="checkbox" class="ch1"  onclick="a[5]=5;"><br></td>
+        <td>[5 CO] Wassertank im Kuehlaggregat</td>
+        <td>  <div class="tooltip">Leitfaehigkeit pruefen<span class="tooltiptext">Details: <br>Ersatzteil: <br>Werkzeug: </span> </div></td>
+        <td>  <div class="tooltip">10.0<span class="tooltiptext">Leitfaehigkeit =< 10 ?S</span> </div></td>
+        <td></td>
+        <td style="background-color:rgb(0,255,0)"><div class="tooltip">OK<span class="tooltiptext">Assign#: 509209<br>LastAssign:<br>Comments:</span> </div></td>
+      </tr>
+      <tr>
+        <td><input type="checkbox" class="ch4"  onclick="a[6]=6;"><br></td>
+        <td>[6 CO] Lueftungsventilatoren im Kuehlaggregat</td>
+        <td>  <div class="tooltip">Funktion kontrollieren<span class="tooltiptext">Details: <br>Ersatzteil: <br>Werkzeug: </span> </div></td>
+        <td>Insp</td>
+        <td></td>
+        <td style="background-color:rgb(0,255,0)"><div class="tooltip">OK<span class="tooltiptext">Assign#: 509209<br>LastAssign:<br>Comments:</span> </div></td>
+      </tr>
+      <tr>
+        <th></th>
+        <th>Wartungsstelle Kompaktentstauber</th>
+        <th>Wartungsaufgabe</th>
+        <th>Soll</th>
+        <th>Ist</th>
+        <th>Zustand</th>
+      </tr>
+
+      <tr>
+        <td><input type="checkbox" class="ch4"  onclick="a[27]=27;"><br></td>
+        <td>[27 ES] Kompaktentstauber</td>
+        <td>  <div class="tooltip">CO2-Flasche Ventil geoeffnet pruefen<span class="tooltiptext">Details: <br>Ersatzteil: SP MAT6565469<br>Werkzeug: </span> </div></td>
+        <td>Insp</td>
+        <td></td>
+        <td style="background-color:rgb(200,200,200)"><div class="tooltip">N/A<span class="tooltiptext"></span> </div></td>
+      </tr>
+      <tr>
+        <th></th>
+        <th>Wartungsstelle Bedienpult</th>
+        <th>Wartungsaufgabe</th>
+        <th>Soll</th>
+        <th>Ist</th>
+        <th>Zustand</th>
+      </tr>
+
+      <tr>
+        <td><input type="checkbox" class="ch1"  onclick="a[33]=33;"><br></td>
+        <td>[33 GC] Bedienpult</td>
+        <td>  <div class="tooltip">Achsdiagnose durchfuehren<span class="tooltiptext">Details: <br>Ersatzteil: Programm Axdiag.LST ausfuehren und Ergebnis an die Email-Adresse Axdiag@Trumpf.com schicken<br>Werkzeug: </span> </div></td>
+        <td>Y/N</td>
+        <td></td>
+        <td style="background-color:rgb(200,200,200)"><div class="tooltip">N/A<span class="tooltiptext"></span> </div></td>
+      </tr>
+      
+      <tr>
+        <td><input type="checkbox" class="ch4"  onclick="a[37]=37;"><br></td>
+        <td>[37 LA] Bedienpult</td>
+        <td>  <div class="tooltip">Selbsttest pruefen<span class="tooltiptext">Details: <br>Ersatzteil: SP MAT6565472<br>Werkzeug: </span> </div></td>
+        <td>Insp</td>
+        <td></td>
+        <td style="background-color:rgb(200,200,200)"><div class="tooltip">N/A<span class="tooltiptext"></span> </div></td>
+      </tr>
+      <tr>
+        <td><input type="checkbox" class="ch4"  onclick="a[43]=43;"><br></td>
+        <td>[43 LA] Bedienpult</td>
+        <td>  <div class="tooltip">Funktion Telepraesenz  pruefen<span class="tooltiptext">Details: <br>Ersatzteil: SP MAT6565475<br>Werkzeug: </span> </div></td>
+        <td>Insp</td>
+        <td></td>
+        <td style="background-color:rgb(200,200,200)"><div class="tooltip">N/A<span class="tooltiptext"></span> </div></td>
+      </tr>
+          <tr>
+            <th></th>
+            <th>Wartungsstelle Laser</th>
+            <th>Wartungsaufgabe</th>
+            <th>Soll</th>
+            <th>Ist</th>
+            <th>Zustand</th>
+          </tr>
+  
+      <tr>
+        <td><input type="checkbox" class="ch4"  onclick="a[38]=38;"><br></td>
+        <td>[38 LA] Laser</td>
+        <td>  <div class="tooltip">Laserquelle auf Beschaedigung pruefen<span class="tooltiptext">Details: <br>Ersatzteil: SP MAT6565473<br>Werkzeug: </span> </div></td>
+        <td>Insp</td>
+        <td></td>
+        <td style="background-color:rgb(200,200,200)"><div class="tooltip">N/A<span class="tooltiptext"></span> </div></td>
+      </tr>
+      <tr>
+        <td><input type="checkbox" class="ch4"  onclick="a[40]=40;"><br></td>
+        <td>[40 LA] Laser</td>
+        <td>  <div class="tooltip">Reinigungsbiozid (rot) in Tank und 1h Reinigungslauf durchfuehren<span class="tooltiptext">Details: <br>Ersatzteil: Easy Kit CU3 STdrd (50-119L) <> USA CAN, B, NL (1653112) \n<br>Werkzeug: in TruControl ==> Wartung/ Reinigung Laserkreislauf/ Ueberwachung Leitfaehigkeit deaktivieren</span> </div></td>
+        <td>Insp</td>
+        <td></td>
+        <td style="background-color:rgb(200,200,200)"><div class="tooltip">N/A<span class="tooltiptext"></span> </div></td>
+      </tr>
+      <tr>
+        <td><input type="checkbox" class="ch4"  onclick="a[41]=41;"><br></td>
+        <td>[41 LA] Laser</td>
+        <td>  <div class="tooltip">Funktion Schluesselschalter pruefen<span class="tooltiptext">Details: (Pruefung durch hoeren und fuehlen)<br>Ersatzteil: SP MAT6565473<br>Werkzeug: </span> </div></td>
+        <td>Insp</td>
+        <td></td>
+        <td style="background-color:rgb(200,200,200)"><div class="tooltip">N/A<span class="tooltiptext"></span> </div></td>
+      </tr>
+      <tr>
+        <td><input type="checkbox" class="ch4"  onclick="a[42]=42;"><br></td>
+        <td>[42 LA] Laser</td>
+        <td>  <div class="tooltip">Funktion Haubenschalter pruefen<span class="tooltiptext">Details: Fehlermeldung auf TruControl erscheint<br>Ersatzteil: SP MAT6565474<br>Werkzeug: </span> </div></td>
+        <td>Insp</td>
+        <td></td>
+        <td style="background-color:rgb(200,200,200)"><div class="tooltip">N/A<span class="tooltiptext"></span> </div></td>
+      </tr>
+
+      <tr>
+        <td><input type="checkbox" class="ch4"  onclick="a[44]=44;"><br></td>
+        <td>[44 LA] Laser</td>
+        <td>  <div class="tooltip">Luefter von Steuerung und Schrank pruefen<span class="tooltiptext">Details: <br>Ersatzteil: SP MAT6565476<br>Werkzeug: </span> </div></td>
+        <td>Insp</td>
+        <td></td>
+        <td style="background-color:rgb(200,200,200)"><div class="tooltip">N/A<span class="tooltiptext"></span> </div></td>
+      </tr>
+    </table>   
+  </div>
+
+<script>
+function opentab(evt, cityName) {
+  var i, tabcontent, tablinks;
+  tabcontent = document.getElementsByClassName("tabcontent");
+  for (i = 0; i < tabcontent.length; i++) {
+    tabcontent[i].style.display = "none";
+  }
+  tablinks = document.getElementsByClassName("tablinks");
+  for (i = 0; i < tablinks.length; i++) {
+    tablinks[i].className = tablinks[i].className.replace(" active", "");
+  }
+  document.getElementById(cityName).style.display = "block";
+  evt.currentTarget.className += " active";
+}
+opentab(event, 'General')
+</script>
+   
+</body>
+</html> 
